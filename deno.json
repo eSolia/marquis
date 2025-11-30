@@ -1,0 +1,29 @@
+{
+  "name": "@esolia/marquis",
+  "version": "0.1.0",
+  "exports": "./mod.ts",
+  "tasks": {
+    "check": "deno check mod.ts",
+    "test": "deno test --allow-read",
+    "fmt": "deno fmt",
+    "lint": "deno lint",
+    "doc": "deno doc --html --output=docs/api mod.ts"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "singleQuote": true,
+    "exclude": ["docs/api"]
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    },
+    "exclude": ["docs/api"]
+  },
+  "compilerOptions": {
+    "strict": true,
+    "lib": ["dom", "dom.iterable", "deno.ns"]
+  }
+}

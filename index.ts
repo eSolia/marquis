@@ -1,0 +1,212 @@
+/**
+ * eSolia UI Component Library
+ *
+ * A vanilla TypeScript component library providing polished,
+ * professional UI components for eSolia applications.
+ *
+ * @example
+ * // Import specific components
+ * import { getBadgeClasses, createBadge } from './ui/badge.ts';
+ * import { getButtonClasses, createButton } from './ui/button.ts';
+ *
+ * // Or import from index
+ * import { Badge, Button, Table } from './index.ts';
+ */
+
+// =============================================================================
+// UTILITIES
+// =============================================================================
+
+export { clsx, cn } from './utils/cn.ts';
+
+// =============================================================================
+// ASSETS
+// =============================================================================
+
+export {
+  brandColors,
+  favicon,
+  getLogoDataUri,
+  logoHorizontal,
+  logoHorizontalLight,
+  // Legacy aliases (deprecated)
+  logoMark,
+  logoMarkLight,
+  // Primary exports
+  logoSymbol,
+  logoSymbolLight,
+  type LogoVariant,
+  logoWordmark,
+  logoWordmarkLight,
+} from './assets/index.ts';
+
+// Favicons (pre-generated PNG assets)
+export {
+  FAVICON_SIZES,
+  FAVICON_THEME_COLORS,
+  FAVICON_VARIANTS,
+  type FaviconPaths,
+  type FaviconSize,
+  type FaviconVariant,
+  getCompleteFaviconHtml,
+  getFaviconHtml,
+  getFaviconPaths,
+  getFaviconThemeColor,
+} from './assets/favicons.ts';
+
+// =============================================================================
+// TOKENS
+// =============================================================================
+
+export {
+  draftColors,
+  focusRing,
+  type InteractiveColorKey,
+  interactiveColors,
+  neutralColors,
+  type StatusColorKey,
+  statusColors,
+} from './tokens/colors.ts';
+
+// =============================================================================
+// UI COMPONENTS
+// =============================================================================
+
+// Badge
+export {
+  type BadgeProps,
+  type BadgeSize,
+  type BadgeVariant,
+  createBadge,
+  createBadges,
+  getBadgeClasses,
+} from './ui/badge.ts';
+
+// Button
+export {
+  type ButtonProps,
+  type ButtonSize,
+  type ButtonVariant,
+  createButton,
+  createButtonGroup,
+  type CreateButtonOptions,
+  getButtonClasses,
+} from './ui/button.ts';
+
+// Icon Button
+export {
+  type ActionDefinition,
+  createActionGroup,
+  createIconButton,
+  type CreateIconButtonOptions,
+  getIconButtonClasses,
+  type IconButtonProps,
+  type IconButtonSize,
+  type IconButtonVariant,
+  icons,
+} from './ui/icon-button.ts';
+
+// Card
+export {
+  type CardPadding,
+  type CardProps,
+  type CardVariant,
+  createCard,
+  createStatCard,
+  createStatCardRow,
+  // Card
+  getCardClasses,
+  // Stat Card
+  getStatCardClasses,
+  getStatCardLabelClasses,
+  getStatCardValueClasses,
+  type StatCardProps,
+  type StatCardVariant,
+} from './ui/card.ts';
+
+// Table
+export {
+  createTable,
+  createTableWrapper,
+  getTableBodyClasses,
+  getTableCellClasses,
+  getTableClasses,
+  getTableClassSet,
+  getTableHeaderCellClasses,
+  getTableHeaderClasses,
+  getTableRowClasses,
+  getTableWrapperClasses,
+  type TableCellProps,
+  type TableHeaderProps,
+  type TableProps,
+  type TableRowProps,
+  type TableWrapperProps,
+} from './ui/table.ts';
+
+// Tabs
+export {
+  createTabs,
+  type CreateTabsOptions,
+  getTabClasses,
+  getTabCountClasses,
+  getTabDraftClasses,
+  getTabsContainerClasses,
+  type TabItem,
+  type TabProps,
+  type TabsProps,
+  type TabsVariant,
+} from './ui/tabs.ts';
+
+// Filter Bar
+export {
+  createFilterSearch,
+  type CreateFilterSearchOptions,
+  createFilterSelect,
+  type CreateFilterSelectOptions,
+  type FilterBarProps,
+  type FilterButtonProps,
+  type FilterSearchProps,
+  type FilterSelectProps,
+  getFilterBarClasses,
+  getFilterButtonClasses,
+  getFilterLabelClasses,
+  getFilterSearchContainerClasses,
+  getFilterSearchIconClasses,
+  getFilterSearchInputClasses,
+  getFilterSelectClasses,
+  searchIcon,
+} from './ui/filter-bar.ts';
+
+// =============================================================================
+// NAMESPACE EXPORTS (Alternative API)
+// =============================================================================
+
+import * as BadgeModule from './ui/badge.ts';
+import * as ButtonModule from './ui/button.ts';
+import * as IconButtonModule from './ui/icon-button.ts';
+import * as CardModule from './ui/card.ts';
+import * as TableModule from './ui/table.ts';
+import * as TabsModule from './ui/tabs.ts';
+import * as FilterBarModule from './ui/filter-bar.ts';
+
+/**
+ * Namespace exports for grouped imports
+ *
+ * @example
+ * import { Badge, Button, Table } from './index.ts';
+ *
+ * const classes = Badge.getBadgeClasses({ variant: 'success' });
+ * const btn = Button.createButton('Click me', { variant: 'primary' });
+ */
+import * as AssetsModule from './assets/index.ts';
+import * as FaviconsModule from './assets/favicons.ts';
+
+export const Assets = AssetsModule;
+export const Favicons = FaviconsModule;
+export const Badge = BadgeModule;
+export const Button = ButtonModule;
+export const IconButton = IconButtonModule;
+export const Card = CardModule;
+export const Table = TableModule;
+export const Tabs = TabsModule;
+export const FilterBar = FilterBarModule;

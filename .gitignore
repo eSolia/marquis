@@ -1,0 +1,22 @@
+# Deno
+.deno/
+deno.lock
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+*.js.map
+
+# Coverage
+coverage/
+.nyc_output/
