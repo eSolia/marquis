@@ -18,7 +18,7 @@ export const statusColors = {
     bgSolid: 'bg-emerald-500',
     text: 'text-emerald-700',
     textOnSolid: 'text-white',
-    border: 'border-emerald-200',
+    border: 'border border-emerald-200',
     ring: 'ring-emerald-200',
     ringStrong: 'ring-emerald-500',
   },
@@ -28,7 +28,7 @@ export const statusColors = {
     bgSolid: 'bg-amber-500',
     text: 'text-amber-700',
     textOnSolid: 'text-white',
-    border: 'border-amber-200',
+    border: 'border border-amber-200',
     ring: 'ring-amber-200',
     ringStrong: 'ring-amber-500',
   },
@@ -38,7 +38,7 @@ export const statusColors = {
     bgSolid: 'bg-red-500',
     text: 'text-red-700',
     textOnSolid: 'text-white',
-    border: 'border-red-200',
+    border: 'border border-red-200',
     ring: 'ring-red-200',
     ringStrong: 'ring-red-500',
   },
@@ -48,7 +48,7 @@ export const statusColors = {
     bgSolid: 'bg-blue-500',
     text: 'text-blue-700',
     textOnSolid: 'text-white',
-    border: 'border-blue-200',
+    border: 'border border-blue-200',
     ring: 'ring-blue-200',
     ringStrong: 'ring-blue-500',
   },
@@ -71,9 +71,9 @@ export const neutralColors = {
   textSubtle: 'text-slate-400',
 
   // Borders
-  border: 'border-slate-200',
-  borderStrong: 'border-slate-300',
-  borderSubtle: 'border-slate-100',
+  border: 'border border-slate-200',
+  borderStrong: 'border border-slate-300',
+  borderSubtle: 'border border-slate-100',
 
   // Rings (for focus states, inset borders)
   ring: 'ring-slate-200',
@@ -89,7 +89,7 @@ export const interactiveColors = {
     bgHover: 'hover:bg-blue-700',
     bgActive: 'active:bg-blue-800',
     text: 'text-white',
-    border: 'border-blue-600',
+    border: 'border border-blue-600',
     // For outlined/ghost variants
     textColored: 'text-blue-600',
     textColoredHover: 'hover:text-blue-700',
@@ -101,14 +101,14 @@ export const interactiveColors = {
     bgHover: 'hover:bg-slate-200',
     bgActive: 'active:bg-slate-300',
     text: 'text-slate-700',
-    border: 'border-slate-300',
+    border: 'border border-slate-300',
   },
   danger: {
     bg: 'bg-red-600',
     bgHover: 'hover:bg-red-700',
     bgActive: 'active:bg-red-800',
     text: 'text-white',
-    border: 'border-red-600',
+    border: 'border border-red-600',
     // For outlined/ghost variants
     textColored: 'text-red-600',
     textColoredHover: 'hover:text-red-700',
@@ -120,7 +120,7 @@ export const interactiveColors = {
     bgHover: 'hover:bg-emerald-700',
     bgActive: 'active:bg-emerald-800',
     text: 'text-white',
-    border: 'border-emerald-600',
+    border: 'border border-emerald-600',
     textColored: 'text-emerald-600',
     textColoredHover: 'hover:text-emerald-700',
     bgSubtle: 'bg-emerald-50',
@@ -146,7 +146,7 @@ export const draftColors = {
   bg: 'bg-orange-50',
   bgStrong: 'bg-orange-100',
   text: 'text-orange-700',
-  border: 'border-orange-200',
+  border: 'border border-orange-200',
   ring: 'ring-orange-200',
 } as const;
 
