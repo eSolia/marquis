@@ -180,7 +180,7 @@ export function getStatCardClasses(variant: StatCardVariant = 'default'): string
  */
 export function getStatCardValueClasses(variant: StatCardVariant = 'default'): string {
   return cn(
-    'text-4xl font-semibold tracking-tight',
+    'text-3xl font-mono font-semibold tracking-tight',
     statCardVariantStyles[variant].value,
   );
 }
