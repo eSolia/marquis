@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marquis Kitchen Sink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              mono: ['ui-monospace', 'SFMono-Regular', 'Monaco', 'Consolas', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .section-title {
+        @apply text-2xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200;
+      }
+      .subsection-title {
+        @apply text-lg font-semibold text-slate-700 mb-3;
+      }
+      .component-row {
+        @apply flex flex-wrap items-center gap-3 mb-4;
+      }
+      .label {
+        @apply text-xs text-slate-500 uppercase tracking-wide mb-1;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 min-h-screen p-8">
+    <div class="max-w-6xl mx-auto space-y-12">
+      <header class="mb-8">
+        <h1 class="text-4xl font-bold text-slate-900">Marquis Kitchen Sink</h1>
+        <p class="text-slate-600 mt-2">Visual reference for all Marquis UI components</p>
+      </header>
+
+      <!-- ================================================================== -->
+      <!-- BUTTONS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Buttons</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="subsection-title">Variants</h3>
+            <div class="component-row">
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-4 py-2 text-sm"
+              >
+                Primary
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 active:bg-slate-100 shadow-sm px-4 py-2 text-sm"
+              >
+                Secondary
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-transparent text-slate-700 hover:bg-slate-100 active:bg-slate-200 px-4 py-2 text-sm"
+              >
+                Ghost
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-transparent text-blue-600 border border-blue-300 hover:bg-blue-50 active:bg-blue-100 px-4 py-2 text-sm"
+              >
+                Outline
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-red-600 text-white hover:bg-red-700 active:bg-red-800 shadow-sm px-4 py-2 text-sm"
+              >
+                Danger
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-800 shadow-sm px-4 py-2 text-sm"
+              >
+                Success
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">Sizes</h3>
+            <div class="component-row items-end">
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-3 py-1.5 text-sm"
+              >
+                Small
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-4 py-2 text-sm"
+              >
+                Medium
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-6 py-3 text-base"
+              >
+                Large
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">States</h3>
+            <div class="component-row">
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-4 py-2 text-sm"
+              >
+                Normal
+              </button>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-4 py-2 text-sm opacity-50 cursor-not-allowed pointer-events-none"
+                disabled
+              >
+                Disabled
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- BADGES -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Badges</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="subsection-title">Variants</h3>
+            <div class="component-row">
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-slate-100 text-slate-700 ring-slate-200"
+              >Default</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+              >Success</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-amber-50 text-amber-700 ring-amber-600/20"
+              >Warning</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-red-50 text-red-700 ring-red-600/20"
+              >Error</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-blue-50 text-blue-700 ring-blue-600/20"
+              >Info</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-orange-50 text-orange-700 ring-orange-600/20"
+              >Draft</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">Sizes</h3>
+            <div class="component-row items-end">
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset bg-blue-50 text-blue-700 ring-blue-600/20 px-1.5 py-0.5 text-xs"
+              >Small</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset bg-blue-50 text-blue-700 ring-blue-600/20 px-2 py-0.5 text-xs"
+              >Medium</span>
+              <span
+                class="inline-flex items-center font-medium rounded-full ring-1 ring-inset bg-blue-50 text-blue-700 ring-blue-600/20 px-2.5 py-1 text-sm"
+              >Large</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- CARDS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Cards</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <p class="label">Default</p>
+            <div class="rounded-lg bg-white border border-slate-200 shadow-sm p-6">
+              <h4 class="font-semibold text-slate-900">Card Title</h4>
+              <p class="text-sm text-slate-600 mt-1">Default card with subtle shadow.</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">Elevated</p>
+            <div class="rounded-lg bg-white border border-slate-200 shadow-md p-6">
+              <h4 class="font-semibold text-slate-900">Card Title</h4>
+              <p class="text-sm text-slate-600 mt-1">Elevated card with stronger shadow.</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">Outline</p>
+            <div class="rounded-lg bg-white border border-slate-200 p-6">
+              <h4 class="font-semibold text-slate-900">Card Title</h4>
+              <p class="text-sm text-slate-600 mt-1">Outline card with border only.</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="label">Ghost</p>
+            <div class="rounded-lg bg-transparent p-6">
+              <h4 class="font-semibold text-slate-900">Card Title</h4>
+              <p class="text-sm text-slate-600 mt-1">Ghost card with no decoration.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- STAT CARDS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Stat Cards</h2>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div
+            class="rounded-lg border p-6 shadow-sm flex flex-col items-center justify-center min-h-[120px] bg-white border-slate-200"
+          >
+            <div class="text-3xl font-mono font-semibold tracking-tight text-slate-900">42</div>
+            <div class="text-sm font-medium text-slate-500 uppercase tracking-wide mt-1">Total</div>
+          </div>
+
+          <div
+            class="rounded-lg border p-6 shadow-sm flex flex-col items-center justify-center min-h-[120px] bg-gradient-to-b from-emerald-50 to-emerald-100/50 border-emerald-200"
+          >
+            <div class="text-3xl font-mono font-semibold tracking-tight text-emerald-700">38</div>
+            <div class="text-sm font-medium text-slate-500 uppercase tracking-wide mt-1">
+              Healthy
+            </div>
+          </div>
+
+          <div
+            class="rounded-lg border p-6 shadow-sm flex flex-col items-center justify-center min-h-[120px] bg-gradient-to-b from-amber-50 to-amber-100/50 border-amber-200"
+          >
+            <div class="text-3xl font-mono font-semibold tracking-tight text-amber-700">3</div>
+            <div class="text-sm font-medium text-slate-500 uppercase tracking-wide mt-1">
+              Warning
+            </div>
+          </div>
+
+          <div
+            class="rounded-lg border p-6 shadow-sm flex flex-col items-center justify-center min-h-[120px] bg-gradient-to-b from-red-50 to-red-100/50 border-red-200"
+          >
+            <div class="text-3xl font-mono font-semibold tracking-tight text-red-700">1</div>
+            <div class="text-sm font-medium text-slate-500 uppercase tracking-wide mt-1">
+              Critical
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- ICON BUTTONS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Icon Buttons</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="subsection-title">Variants</h3>
+            <div class="component-row">
+              <button
+                class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-9 h-9 bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-700"
+                title="Default"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  >
+                  </path>
+                </svg>
+              </button>
+              <button
+                class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-9 h-9 bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-700"
+                title="Info/View"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  >
+                  </path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  >
+                  </path>
+                </svg>
+              </button>
+              <button
+                class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-9 h-9 bg-amber-100 text-amber-600 hover:bg-amber-200 hover:text-amber-700"
+                title="Warning/Edit"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  >
+                  </path>
+                </svg>
+              </button>
+              <button
+                class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-9 h-9 bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700"
+                title="Danger/Delete"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  >
+                  </path>
+                </svg>
+              </button>
+              <button
+                class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-9 h-9 bg-emerald-100 text-emerald-600 hover:bg-emerald-200 hover:text-emerald-700"
+                title="Success/Approve"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  >
+                  </path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">Action Group (typical table row actions)</h3>
+            <div class="component-row">
+              <div class="inline-flex items-center gap-1">
+                <button
+                  class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-8 h-8 bg-blue-100 text-blue-600 hover:bg-blue-200 hover:text-blue-700"
+                  title="View"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    >
+                    </path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    >
+                    </path>
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-8 h-8 bg-amber-100 text-amber-600 hover:bg-amber-200 hover:text-amber-700"
+                  title="Edit"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                    >
+                    </path>
+                  </svg>
+                </button>
+                <button
+                  class="inline-flex items-center justify-center rounded-md transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-8 h-8 bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700"
+                  title="Delete"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                    >
+                    </path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TABS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Tabs</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="subsection-title">Underline Style</h3>
+            <div class="border-b border-slate-200 flex gap-0">
+              <button
+                class="px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset text-blue-600 border-b-2 border-blue-600"
+              >
+                Systems <span
+                  class="ml-1.5 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700"
+                >5</span>
+              </button>
+              <button
+                class="px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset text-slate-500 border-b-2 border-transparent hover:text-slate-700 hover:border-slate-300"
+              >
+                Frameworks <span
+                  class="ml-1.5 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-xs font-medium rounded-full bg-slate-100 text-slate-600"
+                >2</span>
+              </button>
+              <button
+                class="px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset text-slate-500 border-b-2 border-transparent hover:text-slate-700 hover:border-slate-300"
+              >
+                Applications
+              </button>
+              <button
+                class="px-4 py-2.5 text-sm font-medium text-slate-300 cursor-not-allowed border-b-2 border-transparent"
+              >
+                Disabled
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">Pills Style</h3>
+            <div class="bg-slate-100 p-1 rounded-lg inline-flex gap-1">
+              <button
+                class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset bg-white text-slate-900 shadow-sm"
+              >
+                All
+              </button>
+              <button
+                class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset text-slate-600 hover:text-slate-900 hover:bg-white/50"
+              >
+                Active
+              </button>
+              <button
+                class="px-3 py-1.5 text-sm font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset text-slate-600 hover:text-slate-900 hover:bg-white/50"
+              >
+                Archived
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- TABLE -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Table</h2>
+
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-x-auto">
+          <table class="min-w-full w-full divide-y divide-slate-200">
+            <thead class="bg-slate-50">
+              <tr>
+                <th
+                  class="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-left"
+                >
+                  Name
+                </th>
+                <th
+                  class="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-left"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-left"
+                >
+                  Role
+                </th>
+                <th
+                  class="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-slate-100">
+              <tr class="transition-colors duration-100 hover:bg-slate-50">
+                <td class="px-4 py-3 text-sm font-medium text-slate-900">Alice Johnson</td>
+                <td class="px-4 py-3 text-sm text-slate-700">
+                  <span
+                    class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-emerald-50 text-emerald-700 ring-emerald-600/20"
+                  >Active</span>
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-500">Administrator</td>
+                <td class="px-4 py-3 text-sm text-right">
+                  <div class="inline-flex items-center gap-1">
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-blue-100 text-blue-600 hover:bg-blue-200"
+                      title="View"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        >
+                        </path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-amber-100 text-amber-600 hover:bg-amber-200"
+                      title="Edit"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="transition-colors duration-100 hover:bg-slate-50">
+                <td class="px-4 py-3 text-sm font-medium text-slate-900">Bob Smith</td>
+                <td class="px-4 py-3 text-sm text-slate-700">
+                  <span
+                    class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-amber-50 text-amber-700 ring-amber-600/20"
+                  >Pending</span>
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-500">User</td>
+                <td class="px-4 py-3 text-sm text-right">
+                  <div class="inline-flex items-center gap-1">
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-blue-100 text-blue-600 hover:bg-blue-200"
+                      title="View"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        >
+                        </path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-amber-100 text-amber-600 hover:bg-amber-200"
+                      title="Edit"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr class="transition-colors duration-100 hover:bg-slate-50">
+                <td class="px-4 py-3 text-sm font-medium text-slate-900">Carol Davis</td>
+                <td class="px-4 py-3 text-sm text-slate-700">
+                  <span
+                    class="inline-flex items-center font-medium rounded-full ring-1 ring-inset px-2 py-0.5 text-xs bg-red-50 text-red-700 ring-red-600/20"
+                  >Inactive</span>
+                </td>
+                <td class="px-4 py-3 text-sm text-slate-500">User</td>
+                <td class="px-4 py-3 text-sm text-right">
+                  <div class="inline-flex items-center gap-1">
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-blue-100 text-blue-600 hover:bg-blue-200"
+                      title="View"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        >
+                        </path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                    <button
+                      class="inline-flex items-center justify-center rounded-md w-7 h-7 bg-emerald-100 text-emerald-600 hover:bg-emerald-200"
+                      title="Reactivate"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 13l4 4L19 7"
+                        >
+                        </path>
+                      </svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- FILTER BAR -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Filter Bar</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="subsection-title">Default (no background)</h3>
+            <div class="flex items-center gap-3 justify-end">
+              <label class="text-sm font-medium text-slate-600 whitespace-nowrap">Status:</label>
+              <select
+                class="h-9 text-sm pl-3 pr-8 rounded-md border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400"
+              >
+                <option>All</option>
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Inactive</option>
+              </select>
+              <label class="text-sm font-medium text-slate-600 whitespace-nowrap">Role:</label>
+              <select
+                class="h-9 text-sm pl-3 pr-8 rounded-md border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400"
+              >
+                <option>All Roles</option>
+                <option>Administrator</option>
+                <option>User</option>
+              </select>
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 bg-transparent text-slate-700 hover:bg-slate-100 active:bg-slate-200 px-3 py-1.5 text-sm"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">With background</h3>
+            <div
+              class="flex items-center gap-3 justify-end px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg"
+            >
+              <label class="text-sm font-medium text-slate-600 whitespace-nowrap">Client:</label>
+              <select
+                class="h-9 text-sm pl-3 pr-8 rounded-md border border-slate-300 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400"
+              >
+                <option>All Clients</option>
+                <option>Acme Corp</option>
+                <option>Globex</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Search..."
+                class="h-9 text-sm px-3 rounded-md border border-slate-300 bg-white text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-slate-400 w-48"
+              >
+              <button
+                class="inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-150 bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm px-3 py-1.5 text-sm"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================== -->
+      <!-- COLOR TOKENS -->
+      <!-- ================================================================== -->
+      <section>
+        <h2 class="section-title">Color Tokens</h2>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="subsection-title">Status Colors</h3>
+            <div class="grid grid-cols-4 gap-4">
+              <div class="space-y-2">
+                <p class="label">Success</p>
+                <div class="h-12 rounded bg-emerald-50 border border-emerald-200"></div>
+                <div class="h-8 rounded bg-emerald-500"></div>
+                <p class="text-emerald-700 text-sm font-medium">Text</p>
+              </div>
+              <div class="space-y-2">
+                <p class="label">Warning</p>
+                <div class="h-12 rounded bg-amber-50 border border-amber-200"></div>
+                <div class="h-8 rounded bg-amber-500"></div>
+                <p class="text-amber-700 text-sm font-medium">Text</p>
+              </div>
+              <div class="space-y-2">
+                <p class="label">Error</p>
+                <div class="h-12 rounded bg-red-50 border border-red-200"></div>
+                <div class="h-8 rounded bg-red-500"></div>
+                <p class="text-red-700 text-sm font-medium">Text</p>
+              </div>
+              <div class="space-y-2">
+                <p class="label">Info</p>
+                <div class="h-12 rounded bg-blue-50 border border-blue-200"></div>
+                <div class="h-8 rounded bg-blue-500"></div>
+                <p class="text-blue-700 text-sm font-medium">Text</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="subsection-title">Neutral Colors</h3>
+            <div class="flex gap-2">
+              <div class="w-16 h-16 rounded bg-slate-50 border border-slate-200 flex items-end p-1">
+                <span class="text-[10px] text-slate-500">50</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-100 flex items-end p-1">
+                <span class="text-[10px] text-slate-500">100</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-200 flex items-end p-1">
+                <span class="text-[10px] text-slate-500">200</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-300 flex items-end p-1">
+                <span class="text-[10px] text-slate-500">300</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-400 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">400</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-500 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">500</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-600 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">600</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-700 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">700</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-800 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">800</span>
+              </div>
+              <div class="w-16 h-16 rounded bg-slate-900 flex items-end p-1">
+                <span class="text-[10px] text-slate-100">900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="pt-8 pb-4 border-t border-slate-200 text-center text-sm text-slate-500">
+        Marquis UI Components &bull; eSolia Inc.
+      </footer>
+    </div>
+  </body>
+</html>
