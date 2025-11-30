@@ -75,8 +75,10 @@ function resolveTailwindConflicts(classes: string): string {
     /^(static|fixed|absolute|relative|sticky)$/,
     // Flex/Grid
     /^(justify|items|content|self|place)-/,
-    // Font family and weight
-    /^font-/,
+    // Font family (font-sans, font-serif, font-mono)
+    /^font-(sans|serif|mono)$/,
+    // Font weight (font-thin, font-light, font-normal, font-medium, font-semibold, font-bold, font-extrabold, font-black)
+    /^font-(thin|extralight|light|normal|medium|semibold|bold|extrabold|black)$/,
     // Line height
     /^leading-/,
     // Letter spacing
