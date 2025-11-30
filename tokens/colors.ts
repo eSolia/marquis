@@ -19,8 +19,8 @@ export const statusColors = {
     text: 'text-emerald-700',
     textOnSolid: 'text-white',
     border: 'border border-emerald-200',
-    ring: 'ring-emerald-200',
-    ringStrong: 'ring-emerald-500',
+    ring: 'ring-1 ring-emerald-200',
+    ringStrong: 'ring-2 ring-emerald-500',
   },
   warning: {
     bg: 'bg-amber-50',
@@ -29,8 +29,8 @@ export const statusColors = {
     text: 'text-amber-700',
     textOnSolid: 'text-white',
     border: 'border border-amber-200',
-    ring: 'ring-amber-200',
-    ringStrong: 'ring-amber-500',
+    ring: 'ring-1 ring-amber-200',
+    ringStrong: 'ring-2 ring-amber-500',
   },
   error: {
     bg: 'bg-red-50',
@@ -39,8 +39,8 @@ export const statusColors = {
     text: 'text-red-700',
     textOnSolid: 'text-white',
     border: 'border border-red-200',
-    ring: 'ring-red-200',
-    ringStrong: 'ring-red-500',
+    ring: 'ring-1 ring-red-200',
+    ringStrong: 'ring-2 ring-red-500',
   },
   info: {
     bg: 'bg-blue-50',
@@ -49,8 +49,8 @@ export const statusColors = {
     text: 'text-blue-700',
     textOnSolid: 'text-white',
     border: 'border border-blue-200',
-    ring: 'ring-blue-200',
-    ringStrong: 'ring-blue-500',
+    ring: 'ring-1 ring-blue-200',
+    ringStrong: 'ring-2 ring-blue-500',
   },
 } as const;
 
@@ -76,8 +76,8 @@ export const neutralColors = {
   borderSubtle: 'border border-slate-100',
 
   // Rings (for focus states, inset borders)
-  ring: 'ring-slate-200',
-  ringStrong: 'ring-slate-300',
+  ring: 'ring-1 ring-slate-200',
+  ringStrong: 'ring-2 ring-slate-300',
 } as const;
 
 /**
@@ -147,7 +147,7 @@ export const draftColors = {
   bgStrong: 'bg-orange-100',
   text: 'text-orange-700',
   border: 'border border-orange-200',
-  ring: 'ring-orange-200',
+  ring: 'ring-1 ring-orange-200',
 } as const;
 
 // Type exports for use in components
