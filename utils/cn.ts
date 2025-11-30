@@ -53,16 +53,34 @@ function resolveTailwindConflicts(classes: string): string {
     /^(p|px|py|pt|pr|pb|pl|m|mx|my|mt|mr|mb|ml)-/,
     // Width/Height
     /^(w|h|min-w|min-h|max-w|max-h)-/,
-    // Colors
-    /^(bg|text|border|ring|outline)-/,
+    // Background colors
+    /^bg-/,
+    // Text colors (text-{color}-{shade} or text-white/black/inherit/etc)
+    /^text-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|white|black|inherit|current|transparent)/,
+    // Text sizes (text-xs, text-sm, text-base, text-lg, text-xl, text-2xl, etc)
+    /^text-(xs|sm|base|lg|xl|[2-9]xl)$/,
+    // Border colors
+    /^border-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|white|black|inherit|current|transparent)/,
+    // Border width
+    /^border(-[0-9])?$/,
+    // Ring colors
+    /^ring-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|white|black|inherit|current|transparent)/,
+    // Ring width
+    /^ring(-[0-9])?$/,
+    // Outline
+    /^outline-/,
     // Display
     /^(block|inline|inline-block|flex|inline-flex|grid|inline-grid|hidden)$/,
     // Position
     /^(static|fixed|absolute|relative|sticky)$/,
     // Flex/Grid
     /^(justify|items|content|self|place)-/,
-    // Font
-    /^(font|text|leading|tracking)-/,
+    // Font family and weight
+    /^font-/,
+    // Line height
+    /^leading-/,
+    // Letter spacing
+    /^tracking-/,
     // Border radius
     /^rounded/,
     // Shadow
