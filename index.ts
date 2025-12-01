@@ -177,6 +177,91 @@ export {
   searchIcon,
 } from './ui/filter-bar.ts';
 
+// Dropdown
+export {
+  createDropdown,
+  type CreateDropdownOptions,
+  createUserDropdown,
+  type DropdownAlign,
+  type DropdownItem,
+  type DropdownItemVariant,
+  type DropdownProps,
+  type DropdownVariant,
+  getDropdownClasses,
+  getDropdownCSS,
+  getDropdownDividerClasses,
+  getDropdownHeaderClasses,
+  getDropdownItemClasses,
+  getDropdownMenuClasses,
+  getDropdownTriggerClasses,
+  type UserDropdownOptions,
+} from './ui/dropdown.ts';
+
+// Alert
+export {
+  type AlertProps,
+  type AlertSize,
+  type AlertVariant,
+  createAlert,
+  createAlertElement,
+  createErrorAlert,
+  createInfoAlert,
+  createSuccessAlert,
+  createWarningAlert,
+  getAlertClasses,
+  getAlertContentClasses,
+  getAlertDismissClasses,
+  getAlertIconClasses,
+  getAlertTitleClasses,
+} from './ui/alert.ts';
+
+// Header
+export {
+  createHeader,
+  getHeaderClasses,
+  getHeaderCSS,
+  getLanguageButtonClasses,
+  getNavLinkClasses,
+  type HeaderProps,
+  type LanguageConfig,
+  type LogoConfig,
+  type NavLink,
+  type SwitcherConfig,
+  type UserConfig,
+} from './ui/header.ts';
+
+// Code & Kbd
+export {
+  type CodeBlockProps,
+  type CodeProps,
+  type CodeSize,
+  type CodeVariant,
+  createCode,
+  createCodeBlock,
+  createKbd,
+  createShortcut,
+  getCodeBlockClasses,
+  getCodeClasses,
+  getKbdClasses,
+  type KbdProps,
+} from './ui/code.ts';
+
+// Spinner
+export {
+  createButtonLoading,
+  createLoadingOverlay,
+  createSpinner,
+  createSpinnerWithLabel,
+  getSpinIconClasses,
+  getSpinnerAnimationClass,
+  getSpinnerClasses,
+  getSpinnerCSS,
+  type SpinnerProps,
+  type SpinnerSize,
+  type SpinnerSpeed,
+  type SpinnerVariant,
+} from './ui/spinner.ts';
+
 // =============================================================================
 // NAMESPACE EXPORTS (Alternative API)
 // =============================================================================
@@ -188,6 +273,11 @@ import * as CardModule from './ui/card.ts';
 import * as TableModule from './ui/table.ts';
 import * as TabsModule from './ui/tabs.ts';
 import * as FilterBarModule from './ui/filter-bar.ts';
+import * as DropdownModule from './ui/dropdown.ts';
+import * as AlertModule from './ui/alert.ts';
+import * as HeaderModule from './ui/header.ts';
+import * as CodeModule from './ui/code.ts';
+import * as SpinnerModule from './ui/spinner.ts';
 
 /**
  * Namespace exports for grouped imports
@@ -210,3 +300,8 @@ export const Card = CardModule;
 export const Table = TableModule;
 export const Tabs = TabsModule;
 export const FilterBar = FilterBarModule;
+export const Dropdown = DropdownModule;
+export const Alert = AlertModule;
+export const Header = HeaderModule;
+export const Code = CodeModule;
+export const Spinner = SpinnerModule;
