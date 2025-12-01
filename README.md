@@ -23,7 +23,7 @@ focused on visual presentation and brand consistency._
 // In deno.json
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.1.0/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.0/mod.ts"
   }
 }
 ```
@@ -101,16 +101,21 @@ const actions = createActionGroup([
 
 ## Components
 
-| Component      | Description                                             |
-| -------------- | ------------------------------------------------------- |
-| **Badge**      | Status/label badges with semantic variants              |
-| **Button**     | Buttons with primary, secondary, ghost, danger variants |
-| **IconButton** | Square icon buttons for row actions                     |
-| **Card**       | Container cards with multiple styles                    |
-| **StatCard**   | Dashboard metric display cards                          |
-| **Table**      | Table styling utilities                                 |
-| **Tabs**       | Tab groups with counts and icons                        |
-| **FilterBar**  | Filter controls (select, search, buttons)               |
+| Component      | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| **Badge**      | Status/label badges with semantic variants                |
+| **Button**     | Buttons with primary, secondary, ghost, danger variants   |
+| **IconButton** | Square icon buttons for row actions                       |
+| **Card**       | Container cards with multiple styles                      |
+| **StatCard**   | Dashboard metric display cards                            |
+| **Table**      | Table styling utilities                                   |
+| **Tabs**       | Tab groups with counts and icons                          |
+| **FilterBar**  | Filter controls (select, search, buttons)                 |
+| **Dropdown**   | CSS-only dropdown menus (no JavaScript required)          |
+| **Alert**      | Contextual feedback messages (info/success/warning/error) |
+| **Header**     | Application header with nav, language switcher, user menu |
+| **Code**       | Inline code, code blocks, and keyboard shortcuts (kbd)    |
+| **Spinner**    | Loading indicators with multiple sizes and variants       |
 
 ## Design Tokens
 
@@ -162,7 +167,7 @@ Or reference directly from GitHub:
 ```html
 <link
   rel="icon"
-  href="https://raw.githubusercontent.com/eSolia/marquis/v0.1.0/assets/favicons/darkblue/favicon-32x32.png"
+  href="https://raw.githubusercontent.com/eSolia/marquis/v0.2.0/assets/favicons/darkblue/favicon-32x32.png"
 >
 ```
 
@@ -176,13 +181,18 @@ marquis/
 ├── tokens/
 │   └── colors.ts       # Color definitions
 ├── ui/
+│   ├── alert.ts
 │   ├── badge.ts
 │   ├── button.ts
-│   ├── icon-button.ts
 │   ├── card.ts
+│   ├── code.ts
+│   ├── dropdown.ts
+│   ├── filter-bar.ts
+│   ├── header.ts
+│   ├── icon-button.ts
+│   ├── spinner.ts
 │   ├── table.ts
-│   ├── tabs.ts
-│   └── filter-bar.ts
+│   └── tabs.ts
 ├── utils/
 │   └── cn.ts           # Class name merging
 ├── assets/

@@ -12,7 +12,7 @@ Clone or copy the `marquis` repository to your project, or import directly from 
 // In deno.json (recommended: pin to version)
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.1.0/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.0/mod.ts"
   }
 }
 ```
@@ -359,6 +359,313 @@ filterBar.appendChild(search);
 filterBar.appendChild(categorySelect);
 ```
 
+### Alerts
+
+**In Templates:**
+
+```html
+<!-- Info alert -->
+<div class="{{ getAlertClasses({ variant: 'info' }) }}">
+  <div class="{{ getAlertContentClasses() }}">
+    Your session will expire in 5 minutes.
+  </div>
+</div>
+
+<!-- Success alert with title -->
+<div class="{{ getAlertClasses({ variant: 'success' }) }}">
+  <div class="{{ getAlertTitleClasses() }}">Success!</div>
+  <div class="{{ getAlertContentClasses() }}">
+    Your changes have been saved.
+  </div>
+</div>
+
+<!-- Dismissible error alert -->
+<div class="{{ getAlertClasses({ variant: 'error', dismissible: true }) }}">
+  <div class="{{ getAlertContentClasses() }}">
+    Failed to connect to server.
+  </div>
+  <button class="{{ getAlertDismissClasses() }}" aria-label="Dismiss">×</button>
+</div>
+```
+
+**In TypeScript:**
+
+```typescript
+import {
+  createAlert,
+  createErrorAlert,
+  createInfoAlert,
+  createSuccessAlert,
+  createWarningAlert,
+} from '@esolia/marquis';
+
+// Simple alert
+const alert = createAlert('Operation completed', { variant: 'success' });
+
+// Convenience functions
+const success = createSuccessAlert('Changes saved!');
+const error = createErrorAlert('Connection failed', { title: 'Error' });
+const info = createInfoAlert('New version available');
+const warning = createWarningAlert('Disk space low');
+
+document.querySelector('.alerts').appendChild(success);
+```
+
+### Dropdown Menus
+
+Dropdowns are CSS-only (no JavaScript required for basic functionality).
+
+**In Templates:**
+
+```html
+<!-- Add CSS (once per page) -->
+<style>${getDropdownCSS()}</style>
+
+<!-- User dropdown in header -->
+<div class="{{ getDropdownClasses({ variant: 'header', align: 'right' }) }}">
+  <button class="{{ getDropdownTriggerClasses() }}">
+    <span>John Doe</span>
+    <svg><!-- chevron icon --></svg>
+  </button>
+  <div class="{{ getDropdownMenuClasses() }}">
+    <a href="/profile" class="{{ getDropdownItemClasses() }}">Profile</a>
+    <a href="/settings" class="{{ getDropdownItemClasses() }}">Settings</a>
+    <div class="{{ getDropdownDividerClasses() }}"></div>
+    <a href="/logout" class="{{ getDropdownItemClasses({ variant: 'danger' }) }}">Logout</a>
+  </div>
+</div>
+```
+
+**In TypeScript:**
+
+```typescript
+import { createDropdown, createUserDropdown, getDropdownCSS } from '@esolia/marquis';
+
+// Add CSS to page
+document.head.insertAdjacentHTML('beforeend', `<style>${getDropdownCSS()}</style>`);
+
+// Create a dropdown menu
+const dropdown = createDropdown({
+  trigger: '<span>Actions</span>',
+  items: [
+    { label: 'Edit', href: '/edit' },
+    { label: 'Duplicate', href: '/duplicate' },
+    { divider: true },
+    { label: 'Delete', variant: 'danger', onclick: 'confirmDelete()' },
+  ],
+  align: 'right',
+});
+
+// User dropdown (convenience function)
+const userDropdown = createUserDropdown({
+  userName: 'John Doe',
+  userEmail: 'john@example.com',
+  items: [
+    { label: 'Profile', href: '/profile', icon: '<i class="ph ph-user"></i>' },
+    { label: 'Settings', href: '/settings', icon: '<i class="ph ph-gear"></i>' },
+    { divider: true },
+    { label: 'Logout', href: '/logout', variant: 'danger' },
+  ],
+});
+```
+
+### Application Header
+
+**In Templates:**
+
+```html
+<!-- Add CSS (once per page) -->
+<style>${getHeaderCSS()}</style>
+
+<header class="{{ getHeaderClasses() }}">
+  <!-- Logo -->
+  <div class="logo">
+    ${logoSymbol}
+  </div>
+
+  <!-- Navigation -->
+  <nav class="flex items-center gap-6">
+    <a href="/dashboard" class="{{ getNavLinkClasses({ active: true }) }}">Dashboard</a>
+    <a href="/reports" class="{{ getNavLinkClasses() }}">Reports</a>
+    <a href="/settings" class="{{ getNavLinkClasses() }}">Settings</a>
+  </nav>
+
+  <!-- Right side: language switcher + user menu -->
+  <div class="flex items-center gap-4">
+    <button class="{{ getLanguageButtonClasses({ active: lang === 'en' }) }}">EN</button>
+    <button class="{{ getLanguageButtonClasses({ active: lang === 'ja' }) }}">日本語</button>
+    <!-- User dropdown here -->
+  </div>
+</header>
+```
+
+**In TypeScript:**
+
+```typescript
+import { createHeader, getHeaderCSS } from '@esolia/marquis';
+
+// Add CSS
+document.head.insertAdjacentHTML('beforeend', `<style>${getHeaderCSS()}</style>`);
+
+// Create complete header
+const header = createHeader({
+  logo: {
+    svg: logoSymbol,
+    href: '/',
+    alt: 'eSolia',
+  },
+  navLinks: [
+    { label: 'Dashboard', href: '/dashboard', active: true },
+    { label: 'Reports', href: '/reports' },
+    { label: 'Settings', href: '/settings' },
+  ],
+  language: {
+    current: 'en',
+    options: [
+      { code: 'en', label: 'EN' },
+      { code: 'ja', label: '日本語' },
+    ],
+    onChange: (code) => switchLanguage(code),
+  },
+  user: {
+    name: 'John Doe',
+    email: 'john@example.com',
+    menuItems: [
+      { label: 'Profile', href: '/profile' },
+      { label: 'Logout', href: '/logout', variant: 'danger' },
+    ],
+  },
+});
+
+document.body.prepend(header);
+```
+
+### Code and Keyboard Shortcuts
+
+**Inline Code:**
+
+```html
+<p>
+  Run <code class="{{ getCodeClasses() }}">deno task dev</code> to start the server.
+</p>
+
+<!-- With variant -->
+<code class="{{ getCodeClasses({ variant: 'info' }) }}">GET /api/users</code>
+```
+
+**Code Blocks:**
+
+```html
+<pre
+  class="{{ getCodeBlockClasses() }}"
+>
+<code>const greeting = "Hello, World!";
+console.log(greeting);</code></pre>
+```
+
+**Keyboard Shortcuts (kbd):**
+
+```html
+<p>
+  Press <kbd class="{{ getKbdClasses() }}">⌘</kbd> +
+  <kbd class="{{ getKbdClasses() }}">S</kbd> to save.
+</p>
+```
+
+**In TypeScript:**
+
+```typescript
+import { createCode, createCodeBlock, createKbd, createShortcut } from '@esolia/marquis';
+
+// Inline code
+const code = createCode('npm install');
+
+// Code block
+const codeBlock = createCodeBlock(`function greet(name) {
+  return \`Hello, \${name}!\`;
+}`);
+
+// Keyboard key
+const cmdKey = createKbd('⌘');
+
+// Keyboard shortcut (multiple keys)
+const shortcut = createShortcut(['⌘', 'Shift', 'P']);
+```
+
+### Loading Spinners
+
+**In Templates:**
+
+```html
+<!-- Add CSS (once per page) -->
+<style>${getSpinnerCSS()}</style>
+
+<!-- Basic spinner -->
+<div class="{{ getSpinnerClasses() }}">
+  <svg class="{{ getSpinIconClasses() }}"><!-- spinner svg --></svg>
+</div>
+
+<!-- With label -->
+<div class="flex items-center gap-2">
+  <div class="{{ getSpinnerClasses({ size: 'sm' }) }}">
+    <svg class="{{ getSpinIconClasses() }}"><!-- spinner svg --></svg>
+  </div>
+  <span>Loading...</span>
+</div>
+
+<!-- Different sizes -->
+<div class="{{ getSpinnerClasses({ size: 'xs' }) }}">...</div>
+<div class="{{ getSpinnerClasses({ size: 'sm' }) }}">...</div>
+<div class="{{ getSpinnerClasses({ size: 'md' }) }}">...</div>
+<div class="{{ getSpinnerClasses({ size: 'lg' }) }}">...</div>
+<div class="{{ getSpinnerClasses({ size: 'xl' }) }}">...</div>
+```
+
+**In TypeScript:**
+
+```typescript
+import {
+  createButtonLoading,
+  createLoadingOverlay,
+  createSpinner,
+  createSpinnerWithLabel,
+  getSpinnerCSS,
+} from '@esolia/marquis';
+
+// Add CSS
+document.head.insertAdjacentHTML('beforeend', `<style>${getSpinnerCSS()}</style>`);
+
+// Basic spinner
+const spinner = createSpinner({ size: 'md', variant: 'primary' });
+
+// Spinner with label
+const loadingIndicator = createSpinnerWithLabel('Loading data...', { size: 'sm' });
+
+// Button with loading state
+const loadingButton = createButtonLoading('Saving...', { variant: 'primary' });
+
+// Full-page loading overlay
+const overlay = createLoadingOverlay('Please wait...');
+document.body.appendChild(overlay);
+// Remove when done: overlay.remove();
+```
+
+**Spinner Variants:**
+
+- `default` - Slate/gray
+- `primary` - Blue
+- `success` - Emerald
+- `warning` - Amber
+- `error` - Red
+
+**Speed Options:**
+
+```typescript
+createSpinner({ speed: 'slow' }); // 1.5s rotation
+createSpinner({ speed: 'normal' }); // 1s rotation (default)
+createSpinner({ speed: 'fast' }); // 0.5s rotation
+```
+
 ## Combining Components
 
 ### Complete Page Section
@@ -541,7 +848,7 @@ const headTags = getCompleteFaviconHtml('darkblue', '/assets/favicons');
 **Referencing from GitHub (for quick setup):**
 
 ```typescript
-const baseUrl = 'https://raw.githubusercontent.com/eSolia/marquis/v0.1.0/assets/favicons';
+const baseUrl = 'https://raw.githubusercontent.com/eSolia/marquis/v0.2.0/assets/favicons';
 const html = getCompleteFaviconHtml('darkblue', baseUrl);
 ```
 
