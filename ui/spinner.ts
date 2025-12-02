@@ -63,19 +63,27 @@ export function getSpinnerCSS(): string {
 
 .marquis-spin {
   animation: marquis-spin 1s linear infinite;
+  transform-origin: center center;
+  display: inline-block;
 }
 
 .marquis-spin-slow {
   animation: marquis-spin 1.5s linear infinite;
+  transform-origin: center center;
+  display: inline-block;
 }
 
 .marquis-spin-fast {
   animation: marquis-spin 0.6s linear infinite;
+  transform-origin: center center;
+  display: inline-block;
 }
 
 /* Phosphor Icons compatibility */
 .ph-spin {
   animation: marquis-spin 1s linear infinite;
+  transform-origin: center center;
+  display: inline-block;
 }
 `.trim();
 }
