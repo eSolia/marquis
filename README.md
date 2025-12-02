@@ -23,7 +23,7 @@ focused on visual presentation and brand consistency._
 // In deno.json
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.0/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.1/mod.ts"
   }
 }
 ```
@@ -167,7 +167,7 @@ Or reference directly from GitHub:
 ```html
 <link
   rel="icon"
-  href="https://raw.githubusercontent.com/eSolia/marquis/v0.2.0/assets/favicons/darkblue/favicon-32x32.png"
+  href="https://raw.githubusercontent.com/eSolia/marquis/v0.2.1/assets/favicons/darkblue/favicon-32x32.png"
 >
 ```
 

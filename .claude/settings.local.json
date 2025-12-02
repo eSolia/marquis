@@ -5,7 +5,8 @@
       "Bash(npx sharp-cli:*)",
       "Bash(for size in 16 32 48 180 192 512)",
       "Bash(do)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git show:*)"
     ],
     "deny": [],
     "ask": []
