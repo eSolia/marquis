@@ -1,16 +1,26 @@
 /**
- * eSolia UI Component Library
+ * Marquis - eSolia UI Component Library
  *
  * A vanilla TypeScript component library providing polished,
  * professional UI components for eSolia applications.
  *
+ * Features:
+ * - Customizable theme colors (13 primary colors)
+ * - Full dark mode support
+ * - Tailwind CSS class generation
+ * - Both class getters and DOM creators
+ * - Phosphor Icons integration
+ *
  * @example
  * // Import specific components
- * import { getBadgeClasses, createBadge } from './ui/badge.ts';
- * import { getButtonClasses, createButton } from './ui/button.ts';
+ * import { getBadgeClasses, createBadge } from '@esolia/marquis';
+ * import { getButtonClasses, createButton } from '@esolia/marquis';
  *
- * // Or import from index
- * import { Badge, Button, Table } from './index.ts';
+ * // Or import from namespaces
+ * import { Badge, Button, Table } from '@esolia/marquis';
+ *
+ * // Use custom theme color
+ * const btn = createButton('Submit', { themeColor: 'violet' });
  */
 
 // =============================================================================
@@ -61,12 +71,32 @@ export {
 export {
   draftColors,
   focusRing,
+  getInteractiveColorClasses,
+  getNeutralColorClasses,
+  getStatusColorClasses,
   type InteractiveColorKey,
   interactiveColors,
   neutralColors,
   type StatusColorKey,
   statusColors,
 } from './tokens/colors.ts';
+
+// Theme system
+export {
+  type ColorScale,
+  createTheme,
+  getNeutralClasses,
+  getPrimaryClasses,
+  getStatusClasses,
+  neutralColors as neutralColorsDark,
+  type PrimaryColor,
+  primaryColors,
+  type StatusColorKey as ThemeStatusColorKey,
+  statusColors as statusColorsDark,
+  type Theme as ThemeConfig,
+  theme,
+  type ThemeMode,
+} from './tokens/theme.ts';
 
 // =============================================================================
 // UI COMPONENTS
@@ -76,9 +106,12 @@ export {
 export {
   type BadgeProps,
   type BadgeSize,
+  type BadgeStyle,
   type BadgeVariant,
   createBadge,
   createBadges,
+  createBadgeWithIcon,
+  createDotBadge,
   getBadgeClasses,
 } from './ui/badge.ts';
 
@@ -90,6 +123,7 @@ export {
   createButton,
   createButtonGroup,
   type CreateButtonOptions,
+  createIconOnlyButton,
   getButtonClasses,
 } from './ui/button.ts';
 
@@ -110,16 +144,21 @@ export {
 export {
   type CardPadding,
   type CardProps,
+  type CardSectionProps,
   type CardVariant,
   createCard,
   createStatCard,
   createStatCardRow,
   // Card
+  getCardBodyClasses,
   getCardClasses,
+  getCardFooterClasses,
+  getCardHeaderClasses,
   // Stat Card
   getStatCardClasses,
   getStatCardLabelClasses,
   getStatCardValueClasses,
+  getTrendClasses,
   type StatCardProps,
   type StatCardVariant,
 } from './ui/card.ts';
@@ -262,6 +301,93 @@ export {
   type SpinnerVariant,
 } from './ui/spinner.ts';
 
+// Progress (NEW)
+export {
+  type CircularProgressProps,
+  createCircularProgress,
+  createProgress,
+  createSimpleProgress,
+  getCircularProgressCSS,
+  getProgressBarClasses,
+  getProgressClasses,
+  getProgressCSS,
+  type ProgressProps,
+  type ProgressSize,
+  type ProgressVariant,
+} from './ui/progress.ts';
+
+// Toggle (NEW)
+export {
+  createToggle,
+  type CreateToggleOptions,
+  createToggleWithInput,
+  getToggleClasses,
+  getToggleDescriptionClasses,
+  getToggleLabelClasses,
+  getToggleThumbClasses,
+  getToggleWithLabelClasses,
+  type ToggleProps,
+  type ToggleSize,
+} from './ui/toggle.ts';
+
+// Skeleton (NEW)
+export {
+  createAvatarSkeleton,
+  createCardSkeleton,
+  createSkeleton,
+  createTableRowSkeleton,
+  createTableSkeleton,
+  createTextSkeleton,
+  getSkeletonClasses,
+  getSkeletonCSS,
+  type SkeletonProps,
+  type SkeletonVariant,
+} from './ui/skeleton.ts';
+
+// Avatar (NEW)
+export {
+  type AvatarGroupProps,
+  type AvatarProps,
+  type AvatarShape,
+  type AvatarSize,
+  type AvatarStatus,
+  createAvatar,
+  createAvatarGroup,
+  createAvatarWithInfo,
+  getAvatarClasses,
+  getAvatarImageClasses,
+  getAvatarInitialsClasses,
+  getAvatarPlaceholderClasses,
+  getAvatarStatusClasses,
+  getAvatarTextClasses,
+  getColorFromString,
+  getInitials,
+} from './ui/avatar.ts';
+
+// Toast (NEW)
+export {
+  createToast,
+  dismissAllToasts,
+  getToastActionClasses,
+  getToastClasses,
+  getToastContainer,
+  getToastContentClasses,
+  getToastCSS,
+  getToastDismissClasses,
+  getToastIconClasses,
+  getToastMessageClasses,
+  getToastTitleClasses,
+  showErrorToast,
+  showInfoToast,
+  showSuccessToast,
+  showToast,
+  showWarningToast,
+  type ToastContainerProps,
+  type ToastPosition,
+  type ToastProps,
+  type ToastVariant,
+} from './ui/toast.ts';
+
 // =============================================================================
 // NAMESPACE EXPORTS (Alternative API)
 // =============================================================================
@@ -278,15 +404,22 @@ import * as AlertModule from './ui/alert.ts';
 import * as HeaderModule from './ui/header.ts';
 import * as CodeModule from './ui/code.ts';
 import * as SpinnerModule from './ui/spinner.ts';
+import * as ProgressModule from './ui/progress.ts';
+import * as ToggleModule from './ui/toggle.ts';
+import * as SkeletonModule from './ui/skeleton.ts';
+import * as AvatarModule from './ui/avatar.ts';
+import * as ToastModule from './ui/toast.ts';
+import * as ThemeModule from './tokens/theme.ts';
 
 /**
  * Namespace exports for grouped imports
  *
  * @example
- * import { Badge, Button, Table } from './index.ts';
+ * import { Badge, Button, Table, Theme } from '@esolia/marquis';
  *
  * const classes = Badge.getBadgeClasses({ variant: 'success' });
  * const btn = Button.createButton('Click me', { variant: 'primary' });
+ * const theme = Theme.createTheme('violet');
  */
 import * as AssetsModule from './assets/index.ts';
 import * as FaviconsModule from './assets/favicons.ts';
@@ -305,3 +438,9 @@ export const Alert = AlertModule;
 export const Header = HeaderModule;
 export const Code = CodeModule;
 export const Spinner = SpinnerModule;
+export const Progress = ProgressModule;
+export const Toggle = ToggleModule;
+export const Skeleton = SkeletonModule;
+export const Avatar = AvatarModule;
+export const Toast = ToastModule;
+export const Theme = ThemeModule;

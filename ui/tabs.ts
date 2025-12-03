@@ -18,6 +18,7 @@
 
 import { cn } from '../utils/cn.ts';
 import { focusRing } from '../tokens/colors.ts';
+import { getPrimaryClasses, type PrimaryColor } from '../tokens/theme.ts';
 
 // =============================================================================
 // TYPES
@@ -47,6 +48,10 @@ export interface TabsProps {
   size?: 'sm' | 'md' | 'lg';
   /** Full width tabs */
   fullWidth?: boolean;
+  /** Theme color for active state */
+  themeColor?: PrimaryColor;
+  /** Enable dark mode */
+  darkMode?: boolean;
   class?: string;
 }
 
@@ -59,6 +64,10 @@ export interface TabProps {
   variant?: TabsVariant;
   /** Size */
   size?: 'sm' | 'md' | 'lg';
+  /** Theme color for active state */
+  themeColor?: PrimaryColor;
+  /** Enable dark mode */
+  darkMode?: boolean;
   class?: string;
 }
 
@@ -66,11 +75,25 @@ export interface TabProps {
 // CONTAINER STYLES
 // =============================================================================
 
-const containerVariantStyles: Record<TabsVariant, string> = {
-  underline: 'border-b border-slate-200',
-  pills: 'bg-slate-100 p-1 rounded-lg',
-  buttons: 'bg-slate-100 p-1 rounded-lg',
-};
+function getContainerVariantStyles(variant: TabsVariant, darkMode: boolean = true): string {
+  const variants: Record<TabsVariant, { light: string; dark: string }> = {
+    underline: {
+      light: 'border-b border-slate-200',
+      dark: 'dark:border-slate-700',
+    },
+    pills: {
+      light: 'bg-slate-100 p-1 rounded-lg',
+      dark: 'dark:bg-slate-800',
+    },
+    buttons: {
+      light: 'bg-slate-100 p-1 rounded-lg',
+      dark: 'dark:bg-slate-800',
+    },
+  };
+
+  const style = variants[variant];
+  return darkMode ? `${style.light} ${style.dark}` : style.light;
+}
 
 /**
  * Get classes for tabs container
@@ -79,13 +102,14 @@ export function getTabsContainerClasses(props: TabsProps = {}): string {
   const {
     variant = 'underline',
     fullWidth = false,
+    darkMode = true,
     class: className,
   } = props;
 
   return cn(
     'inline-flex items-center',
     variant === 'underline' ? 'gap-0' : 'gap-1',
-    containerVariantStyles[variant],
+    getContainerVariantStyles(variant, darkMode),
     fullWidth && 'w-full',
     className,
   );
@@ -111,74 +135,106 @@ const tabBaseStyles = [
 /**
  * Underline tab styles
  */
-function getUnderlineTabStyles(active: boolean, disabled: boolean): string {
+function getUnderlineTabStyles(
+  active: boolean,
+  disabled: boolean,
+  themeColor: PrimaryColor,
+  darkMode: boolean,
+): string {
+  const theme = getPrimaryClasses(themeColor);
+
   if (disabled) {
-    return 'text-slate-300 cursor-not-allowed border-b-2 border-transparent';
+    return darkMode
+      ? 'text-slate-300 dark:text-slate-600 cursor-not-allowed border-b-2 border-transparent'
+      : 'text-slate-300 cursor-not-allowed border-b-2 border-transparent';
   }
 
   if (active) {
-    return [
-      'text-blue-600',
-      'border-b-2 border-blue-600',
-      '-mb-px', // Overlap container border
-    ].join(' ');
+    return cn(
+      theme.text,
+      'border-b-2',
+      theme.border,
+      '-mb-px',
+    );
   }
 
-  return [
-    'text-slate-600',
+  return cn(
+    darkMode
+      ? 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+      : 'text-slate-600 hover:text-slate-900',
     'border-b-2 border-transparent',
-    'hover:text-slate-900',
-    'hover:border-slate-300',
+    darkMode ? 'hover:border-slate-300 dark:hover:border-slate-600' : 'hover:border-slate-300',
     '-mb-px',
-  ].join(' ');
+  );
 }
 
 /**
  * Pill tab styles
  */
-function getPillTabStyles(active: boolean, disabled: boolean): string {
+function getPillTabStyles(
+  active: boolean,
+  disabled: boolean,
+  _themeColor: PrimaryColor,
+  darkMode: boolean,
+): string {
   if (disabled) {
-    return 'text-slate-300 cursor-not-allowed';
+    return darkMode
+      ? 'text-slate-300 dark:text-slate-600 cursor-not-allowed'
+      : 'text-slate-300 cursor-not-allowed';
   }
 
   if (active) {
-    return [
-      'bg-white text-slate-900',
+    return cn(
+      darkMode
+        ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white'
+        : 'bg-white text-slate-900',
       'shadow-sm',
       'rounded-md',
-    ].join(' ');
+    );
   }
 
-  return [
-    'text-slate-600',
-    'hover:text-slate-900',
-    'hover:bg-white/50',
+  return cn(
+    darkMode
+      ? 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+      : 'text-slate-600 hover:text-slate-900',
+    darkMode ? 'hover:bg-white/50 dark:hover:bg-slate-700/50' : 'hover:bg-white/50',
     'rounded-md',
-  ].join(' ');
+  );
 }
 
 /**
  * Button tab styles (similar to pills but more distinct)
  */
-function getButtonTabStyles(active: boolean, disabled: boolean): string {
+function getButtonTabStyles(
+  active: boolean,
+  disabled: boolean,
+  themeColor: PrimaryColor,
+  darkMode: boolean,
+): string {
+  const theme = getPrimaryClasses(themeColor);
+
   if (disabled) {
-    return 'text-slate-300 cursor-not-allowed';
+    return darkMode
+      ? 'text-slate-300 dark:text-slate-600 cursor-not-allowed'
+      : 'text-slate-300 cursor-not-allowed';
   }
 
   if (active) {
-    return [
-      'bg-blue-600 text-white',
+    return cn(
+      theme.bgSolid,
+      'text-white',
       'shadow-sm',
       'rounded-md',
-    ].join(' ');
+    );
   }
 
-  return [
-    'text-slate-600',
-    'hover:text-slate-900',
-    'hover:bg-white/50',
+  return cn(
+    darkMode
+      ? 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+      : 'text-slate-600 hover:text-slate-900',
+    darkMode ? 'hover:bg-white/50 dark:hover:bg-slate-700/50' : 'hover:bg-white/50',
     'rounded-md',
-  ].join(' ');
+  );
 }
 
 /**
@@ -190,6 +246,8 @@ export function getTabClasses(props: TabProps = {}): string {
     disabled = false,
     variant = 'underline',
     size = 'md',
+    themeColor = 'blue',
+    darkMode = true,
     class: className,
   } = props;
 
@@ -197,13 +255,13 @@ export function getTabClasses(props: TabProps = {}): string {
 
   switch (variant) {
     case 'pills':
-      variantStyles = getPillTabStyles(active, disabled);
+      variantStyles = getPillTabStyles(active, disabled, themeColor, darkMode);
       break;
     case 'buttons':
-      variantStyles = getButtonTabStyles(active, disabled);
+      variantStyles = getButtonTabStyles(active, disabled, themeColor, darkMode);
       break;
     default:
-      variantStyles = getUnderlineTabStyles(active, disabled);
+      variantStyles = getUnderlineTabStyles(active, disabled, themeColor, darkMode);
   }
 
   return cn(
@@ -221,25 +279,34 @@ export function getTabClasses(props: TabProps = {}): string {
 /**
  * Get classes for count badge within tab
  */
-export function getTabCountClasses(props: { active?: boolean } = {}): string {
-  const { active = false } = props;
+export function getTabCountClasses(props: {
+  active?: boolean;
+  themeColor?: PrimaryColor;
+  darkMode?: boolean;
+} = {}): string {
+  const { active = false, themeColor = 'blue', darkMode = true } = props;
+  const theme = getPrimaryClasses(themeColor);
+
+  const inactiveClasses = darkMode
+    ? 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+    : 'bg-slate-200 text-slate-600';
 
   return cn(
     'inline-flex items-center justify-center',
     'min-w-[1.25rem] h-5 px-1.5',
     'text-xs font-medium',
     'rounded-full',
-    active ? 'bg-blue-100 text-blue-700' : 'bg-slate-200 text-slate-600',
+    active ? `${theme.bgSubtle} ${theme.text}` : inactiveClasses,
   );
 }
 
 /**
  * Get classes for draft indicator
  */
-export function getTabDraftClasses(): string {
+export function getTabDraftClasses(darkMode: boolean = true): string {
   return cn(
     'text-xs font-medium',
-    'text-orange-600',
+    darkMode ? 'text-orange-600 dark:text-orange-400' : 'text-orange-600',
   );
 }
 
@@ -253,7 +320,7 @@ export interface CreateTabsOptions extends TabsProps {
   /** Currently active tab ID */
   activeId: string;
   /** Tab change handler */
-  onTabChange?: (id: string) => void;
+  onChange?: (id: string) => void;
 }
 
 /**
@@ -266,21 +333,24 @@ export interface CreateTabsOptions extends TabsProps {
  *     { id: 'frameworks', label: 'Frameworks', count: 2 },
  *   ],
  *   activeId: 'systems',
- *   onTabChange: (id) => setActiveTab(id),
+ *   onChange: (id) => setActiveTab(id),
+ *   themeColor: 'violet'
  * });
  */
 export function createTabs(options: CreateTabsOptions): HTMLDivElement {
   const {
     items,
     activeId,
-    onTabChange,
+    onChange,
     variant = 'underline',
     size = 'md',
+    themeColor = 'blue',
+    darkMode = true,
     ...containerProps
   } = options;
 
   const container = document.createElement('div');
-  container.className = getTabsContainerClasses({ variant, ...containerProps });
+  container.className = getTabsContainerClasses({ variant, darkMode, ...containerProps });
   container.setAttribute('role', 'tablist');
 
   items.forEach((item) => {
@@ -293,6 +363,8 @@ export function createTabs(options: CreateTabsOptions): HTMLDivElement {
       disabled: item.disabled,
       variant,
       size,
+      themeColor,
+      darkMode,
     });
     button.setAttribute('role', 'tab');
     button.setAttribute('aria-selected', String(isActive));
@@ -319,7 +391,7 @@ export function createTabs(options: CreateTabsOptions): HTMLDivElement {
     // Count
     if (item.count !== undefined) {
       const countSpan = document.createElement('span');
-      countSpan.className = getTabCountClasses({ active: isActive });
+      countSpan.className = getTabCountClasses({ active: isActive, themeColor, darkMode });
       countSpan.textContent = String(item.count);
       button.appendChild(countSpan);
     }
@@ -327,14 +399,14 @@ export function createTabs(options: CreateTabsOptions): HTMLDivElement {
     // Draft indicator
     if (item.draft) {
       const draftSpan = document.createElement('span');
-      draftSpan.className = getTabDraftClasses();
+      draftSpan.className = getTabDraftClasses(darkMode);
       draftSpan.textContent = 'Draft';
       button.appendChild(draftSpan);
     }
 
     // Click handler
-    if (!item.disabled && onTabChange) {
-      button.addEventListener('click', () => onTabChange(item.id));
+    if (!item.disabled && onChange) {
+      button.addEventListener('click', () => onChange(item.id));
     }
 
     // Keyboard navigation

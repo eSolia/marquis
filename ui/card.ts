@@ -3,6 +3,7 @@
  *
  * Container components for grouping related content.
  * Includes base Card and specialized StatCard for dashboard metrics.
+ * Supports dark mode and custom theme colors.
  *
  * @example
  * // Basic card
@@ -20,6 +21,7 @@
  */
 
 import { cn } from '../utils/cn.ts';
+import { getPrimaryClasses, type PrimaryColor } from '../tokens/theme.ts';
 
 // =============================================================================
 // CARD COMPONENT
@@ -29,47 +31,78 @@ export type CardVariant =
   | 'default' // White bg, subtle border and shadow
   | 'elevated' // Stronger shadow
   | 'outline' // Border only, no shadow
-  | 'ghost'; // No border or shadow
+  | 'ghost' // No border or shadow
+  | 'filled'; // Solid background (uses muted color)
 
-export type CardPadding = 'none' | 'sm' | 'md' | 'lg';
+export type CardPadding = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 export interface CardProps {
   variant?: CardVariant;
   padding?: CardPadding;
+  /** Enable dark mode support (default: true) */
+  darkMode?: boolean;
+  /** Hover effect */
+  hoverable?: boolean;
+  /** Make card clickable/interactive */
+  interactive?: boolean;
   class?: string;
 }
 
-const cardVariantStyles: Record<CardVariant, string> = {
-  default: [
-    'bg-white',
-    'border border-slate-200',
-    'shadow-sm',
-  ].join(' '),
+/**
+ * Card variant styles with dark mode
+ */
+function getCardVariantStyles(variant: CardVariant, darkMode: boolean = true): string {
+  const variants: Record<CardVariant, { light: string; dark: string }> = {
+    default: {
+      light: 'bg-white border border-slate-200 shadow-sm',
+      dark: 'dark:bg-slate-900 dark:border-slate-700',
+    },
+    elevated: {
+      light: 'bg-white border border-slate-200 shadow-md',
+      dark: 'dark:bg-slate-900 dark:border-slate-700 dark:shadow-slate-900/50',
+    },
+    outline: {
+      light: 'bg-white border border-slate-200',
+      dark: 'dark:bg-slate-900 dark:border-slate-700',
+    },
+    ghost: {
+      light: 'bg-transparent',
+      dark: '',
+    },
+    filled: {
+      light: 'bg-slate-50 border border-slate-100',
+      dark: 'dark:bg-slate-800/50 dark:border-slate-800',
+    },
+  };
 
-  elevated: [
-    'bg-white',
-    'border border-slate-200',
-    'shadow-md',
-  ].join(' '),
-
-  outline: [
-    'bg-white',
-    'border border-slate-200',
-  ].join(' '),
-
-  ghost: [
-    'bg-transparent',
-  ].join(' '),
-};
+  const { light, dark } = variants[variant];
+  return darkMode ? `${light} ${dark}` : light;
+}
 
 const cardPaddingStyles: Record<CardPadding, string> = {
   none: '',
+  xs: 'p-2',
   sm: 'p-4',
   md: 'p-6',
   lg: 'p-8',
+  xl: 'p-10',
 };
 
 const cardBaseStyles = 'rounded-lg';
+
+/**
+ * Hover styles for interactive cards
+ */
+const hoverStyles = {
+  light: 'hover:shadow-md hover:border-slate-300 transition-shadow duration-200',
+  dark: 'dark:hover:border-slate-600',
+};
+
+const interactiveStyles = {
+  light:
+    'cursor-pointer hover:shadow-md hover:border-slate-300 active:shadow-sm transition-all duration-200',
+  dark: 'dark:hover:border-slate-600 dark:active:bg-slate-800',
+};
 
 /**
  * Get Tailwind classes for a card
@@ -78,13 +111,18 @@ export function getCardClasses(props: CardProps = {}): string {
   const {
     variant = 'default',
     padding = 'md',
+    darkMode = true,
+    hoverable = false,
+    interactive = false,
     class: className,
   } = props;
 
   return cn(
     cardBaseStyles,
-    cardVariantStyles[variant],
+    getCardVariantStyles(variant, darkMode),
     cardPaddingStyles[padding],
+    hoverable && `${hoverStyles.light} ${darkMode ? hoverStyles.dark : ''}`,
+    interactive && `${interactiveStyles.light} ${darkMode ? interactiveStyles.dark : ''}`,
     className,
   );
 }
@@ -111,11 +149,58 @@ export function createCard(
 }
 
 // =============================================================================
+// CARD HEADER / BODY / FOOTER
+// =============================================================================
+
+export interface CardSectionProps {
+  darkMode?: boolean;
+  class?: string;
+}
+
+/**
+ * Get classes for card header section
+ */
+export function getCardHeaderClasses(props: CardSectionProps = {}): string {
+  const { darkMode = true, class: className } = props;
+
+  return cn(
+    'px-6 py-4 border-b',
+    darkMode ? 'border-slate-200 dark:border-slate-700' : 'border-slate-200',
+    className,
+  );
+}
+
+/**
+ * Get classes for card body section
+ */
+export function getCardBodyClasses(props: CardSectionProps = {}): string {
+  const { class: className } = props;
+  return cn('p-6', className);
+}
+
+/**
+ * Get classes for card footer section
+ */
+export function getCardFooterClasses(props: CardSectionProps = {}): string {
+  const { darkMode = true, class: className } = props;
+
+  return cn(
+    'px-6 py-4 border-t',
+    darkMode
+      ? 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50'
+      : 'border-slate-200 bg-slate-50',
+    'rounded-b-lg',
+    className,
+  );
+}
+
+// =============================================================================
 // STAT CARD COMPONENT
 // =============================================================================
 
 export type StatCardVariant =
   | 'default' // Neutral
+  | 'primary' // Theme colored
   | 'success' // Green tint (healthy, positive)
   | 'warning' // Amber tint (attention needed)
   | 'error'; // Red tint (problems, alerts)
@@ -127,43 +212,107 @@ export interface StatCardProps {
   label: string;
   /** Color variant */
   variant?: StatCardVariant;
+  /** Theme color for primary variant */
+  themeColor?: PrimaryColor;
+  /** Enable dark mode support */
+  darkMode?: boolean;
   /** Optional icon (SVG string or element) */
   icon?: string | HTMLElement;
+  /** Trend indicator */
+  trend?: {
+    direction: 'up' | 'down' | 'neutral';
+    value: string;
+    positive?: boolean; // Whether up is good (defaults based on direction)
+  };
   /** Additional classes */
   class?: string;
 }
 
 /**
- * Stat card variant styles
- *
- * Design notes:
- * - Subtle gradient backgrounds for color variants
- * - Maintains readability with dark text
- * - Default is clean white with no color coding
+ * Stat card variant styles with dark mode
  */
-const statCardVariantStyles: Record<StatCardVariant, { container: string; value: string }> = {
-  default: {
-    container: 'bg-white border-slate-200',
-    value: 'text-slate-900',
-  },
-  success: {
-    container: 'bg-gradient-to-b from-emerald-50 to-emerald-100/50 border-emerald-200',
-    value: 'text-emerald-700',
-  },
-  warning: {
-    container: 'bg-gradient-to-b from-amber-50 to-amber-100/50 border-amber-200',
-    value: 'text-amber-700',
-  },
-  error: {
-    container: 'bg-gradient-to-b from-red-50 to-red-100/50 border-red-200',
-    value: 'text-red-700',
-  },
-};
+function getStatCardVariantStyles(
+  variant: StatCardVariant,
+  themeColor: PrimaryColor = 'blue',
+  darkMode: boolean = true,
+): { container: string; value: string; label: string } {
+  if (variant === 'primary') {
+    const theme = getPrimaryClasses(themeColor);
+    return {
+      container: darkMode
+        ? `${theme.bg} ${theme.border} border`
+        : `bg-${themeColor}-50 border border-${themeColor}-200`,
+      value: darkMode ? theme.text : `text-${themeColor}-700`,
+      label: darkMode ? 'text-slate-500 dark:text-slate-400' : 'text-slate-500',
+    };
+  }
+
+  const variants: Record<
+    Exclude<StatCardVariant, 'primary'>,
+    { container: { light: string; dark: string }; value: { light: string; dark: string } }
+  > = {
+    default: {
+      container: {
+        light: 'bg-white border-slate-200',
+        dark: 'dark:bg-slate-900 dark:border-slate-700',
+      },
+      value: {
+        light: 'text-slate-900',
+        dark: 'dark:text-white',
+      },
+    },
+    success: {
+      container: {
+        light: 'bg-gradient-to-b from-emerald-50 to-emerald-100/50 border-emerald-200',
+        dark: 'dark:from-emerald-950 dark:to-emerald-900/50 dark:border-emerald-800',
+      },
+      value: {
+        light: 'text-emerald-700',
+        dark: 'dark:text-emerald-400',
+      },
+    },
+    warning: {
+      container: {
+        light: 'bg-gradient-to-b from-amber-50 to-amber-100/50 border-amber-200',
+        dark: 'dark:from-amber-950 dark:to-amber-900/50 dark:border-amber-800',
+      },
+      value: {
+        light: 'text-amber-700',
+        dark: 'dark:text-amber-400',
+      },
+    },
+    error: {
+      container: {
+        light: 'bg-gradient-to-b from-red-50 to-red-100/50 border-red-200',
+        dark: 'dark:from-red-950 dark:to-red-900/50 dark:border-red-800',
+      },
+      value: {
+        light: 'text-red-700',
+        dark: 'dark:text-red-400',
+      },
+    },
+  };
+
+  const style = variants[variant];
+  return {
+    container: darkMode
+      ? `${style.container.light} ${style.container.dark}`
+      : style.container.light,
+    value: darkMode ? `${style.value.light} ${style.value.dark}` : style.value.light,
+    label: darkMode ? 'text-slate-500 dark:text-slate-400' : 'text-slate-500',
+  };
+}
 
 /**
  * Get Tailwind classes for stat card container
  */
-export function getStatCardClasses(variant: StatCardVariant = 'default'): string {
+export function getStatCardClasses(
+  variant: StatCardVariant = 'default',
+  themeColor: PrimaryColor = 'blue',
+  darkMode: boolean = true,
+): string {
+  const styles = getStatCardVariantStyles(variant, themeColor, darkMode);
+
   return cn(
     // Base
     'rounded-lg border p-6',
@@ -171,25 +320,66 @@ export function getStatCardClasses(variant: StatCardVariant = 'default'): string
     'flex flex-col items-center justify-center',
     'min-h-[120px]',
     // Variant
-    statCardVariantStyles[variant].container,
+    styles.container,
   );
 }
 
 /**
  * Get Tailwind classes for stat card value
  */
-export function getStatCardValueClasses(variant: StatCardVariant = 'default'): string {
+export function getStatCardValueClasses(
+  variant: StatCardVariant = 'default',
+  themeColor: PrimaryColor = 'blue',
+  darkMode: boolean = true,
+): string {
+  const styles = getStatCardVariantStyles(variant, themeColor, darkMode);
+
   return cn(
     'text-3xl font-mono font-semibold tracking-tight',
-    statCardVariantStyles[variant].value,
+    styles.value,
   );
 }
 
 /**
  * Get Tailwind classes for stat card label
  */
-export function getStatCardLabelClasses(): string {
-  return 'text-sm font-medium text-slate-500 uppercase tracking-wide mt-1';
+export function getStatCardLabelClasses(darkMode: boolean = true): string {
+  return cn(
+    'text-sm font-medium uppercase tracking-wide mt-1',
+    darkMode ? 'text-slate-500 dark:text-slate-400' : 'text-slate-500',
+  );
+}
+
+/**
+ * Get Tailwind classes for trend indicator
+ */
+export function getTrendClasses(
+  direction: 'up' | 'down' | 'neutral',
+  positive: boolean,
+  darkMode: boolean = true,
+): string {
+  const baseClasses = 'flex items-center gap-1 text-sm font-medium mt-2';
+
+  if (direction === 'neutral') {
+    return cn(
+      baseClasses,
+      darkMode ? 'text-slate-500 dark:text-slate-400' : 'text-slate-500',
+    );
+  }
+
+  const isGood = direction === 'up' ? positive : !positive;
+
+  if (isGood) {
+    return cn(
+      baseClasses,
+      darkMode ? 'text-emerald-600 dark:text-emerald-400' : 'text-emerald-600',
+    );
+  }
+
+  return cn(
+    baseClasses,
+    darkMode ? 'text-red-600 dark:text-red-400' : 'text-red-600',
+  );
 }
 
 /**
@@ -205,7 +395,8 @@ export function getStatCardLabelClasses(): string {
  * const healthyCard = createStatCard({
  *   value: 6,
  *   label: 'Healthy',
- *   variant: 'success'
+ *   variant: 'success',
+ *   trend: { direction: 'up', value: '+12%', positive: true }
  * });
  */
 export function createStatCard(props: StatCardProps): HTMLDivElement {
@@ -213,17 +404,22 @@ export function createStatCard(props: StatCardProps): HTMLDivElement {
     value,
     label,
     variant = 'default',
+    themeColor = 'blue',
+    darkMode = true,
     icon,
+    trend,
     class: className,
   } = props;
 
   const card = document.createElement('div');
-  card.className = cn(getStatCardClasses(variant), className);
+  card.className = cn(getStatCardClasses(variant, themeColor, darkMode), className);
 
   // Optional icon
   if (icon) {
     const iconContainer = document.createElement('div');
-    iconContainer.className = 'mb-2 text-slate-400';
+    iconContainer.className = darkMode
+      ? 'mb-2 text-slate-400 dark:text-slate-500'
+      : 'mb-2 text-slate-400';
 
     if (typeof icon === 'string') {
       iconContainer.innerHTML = icon;
@@ -242,15 +438,40 @@ export function createStatCard(props: StatCardProps): HTMLDivElement {
 
   // Value
   const valueEl = document.createElement('div');
-  valueEl.className = getStatCardValueClasses(variant);
+  valueEl.className = getStatCardValueClasses(variant, themeColor, darkMode);
   valueEl.textContent = String(value);
   card.appendChild(valueEl);
 
   // Label
   const labelEl = document.createElement('div');
-  labelEl.className = getStatCardLabelClasses();
+  labelEl.className = getStatCardLabelClasses(darkMode);
   labelEl.textContent = label;
   card.appendChild(labelEl);
+
+  // Trend indicator
+  if (trend) {
+    const trendEl = document.createElement('div');
+    const isPositive = trend.positive ?? (trend.direction === 'up');
+    trendEl.className = getTrendClasses(trend.direction, isPositive, darkMode);
+
+    // Trend icon
+    const trendIcon = document.createElement('span');
+    if (trend.direction === 'up') {
+      trendIcon.innerHTML = '<i class="ph ph-trend-up"></i>';
+    } else if (trend.direction === 'down') {
+      trendIcon.innerHTML = '<i class="ph ph-trend-down"></i>';
+    } else {
+      trendIcon.innerHTML = '<i class="ph ph-minus"></i>';
+    }
+    trendEl.appendChild(trendIcon);
+
+    // Trend value
+    const trendValue = document.createElement('span');
+    trendValue.textContent = trend.value;
+    trendEl.appendChild(trendValue);
+
+    card.appendChild(trendEl);
+  }
 
   return card;
 }
@@ -267,9 +488,9 @@ export function createStatCard(props: StatCardProps): HTMLDivElement {
  */
 export function createStatCardRow(
   stats: StatCardProps[],
-  options: { gap?: 'sm' | 'md' | 'lg' } = {},
+  options: { gap?: 'sm' | 'md' | 'lg'; columns?: number } = {},
 ): HTMLDivElement {
-  const { gap = 'md' } = options;
+  const { gap = 'md', columns } = options;
 
   const gapStyles = {
     sm: 'gap-4',
@@ -280,12 +501,12 @@ export function createStatCardRow(
   const row = document.createElement('div');
   row.className = cn(
     'grid',
-    `grid-cols-${stats.length}`,
     gapStyles[gap],
   );
 
-  // Fallback for dynamic grid-cols (Tailwind needs static classes)
-  row.style.gridTemplateColumns = `repeat(${stats.length}, minmax(0, 1fr))`;
+  // Set grid columns
+  const cols = columns || stats.length;
+  row.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
 
   stats.forEach((stat) => {
     row.appendChild(createStatCard(stat));
@@ -298,10 +519,14 @@ export default {
   // Card
   getCardClasses,
   createCard,
+  getCardHeaderClasses,
+  getCardBodyClasses,
+  getCardFooterClasses,
   // Stat Card
   getStatCardClasses,
   getStatCardValueClasses,
   getStatCardLabelClasses,
+  getTrendClasses,
   createStatCard,
   createStatCardRow,
 };

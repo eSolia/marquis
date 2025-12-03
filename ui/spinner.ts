@@ -15,6 +15,7 @@
  */
 
 import { cn } from '../utils/cn.ts';
+import { getPrimaryClasses, type PrimaryColor } from '../tokens/theme.ts';
 
 /**
  * Spinner size
@@ -26,7 +27,10 @@ export type SpinnerSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
  */
 export type SpinnerVariant =
   | 'default' // Slate/gray
-  | 'primary' // Blue
+  | 'primary' // Theme color
+  | 'success' // Green
+  | 'warning' // Amber
+  | 'error' // Red
   | 'white' // White (for dark backgrounds)
   | 'current'; // Inherit current text color
 
@@ -45,6 +49,10 @@ export interface SpinnerProps {
   variant?: SpinnerVariant;
   /** Animation speed */
   speed?: SpinnerSpeed;
+  /** Theme color (used when variant is 'primary') */
+  themeColor?: PrimaryColor;
+  /** Enable dark mode */
+  darkMode?: boolean;
   /** Additional CSS classes */
   class?: string;
 }
@@ -100,14 +108,51 @@ const sizeStyles: Record<SpinnerSize, string> = {
 };
 
 /**
- * Variant styles (color)
+ * Get variant color classes
  */
-const variantStyles: Record<SpinnerVariant, string> = {
-  default: 'text-slate-500',
-  primary: 'text-blue-600',
-  white: 'text-white',
-  current: '', // Inherit from parent
-};
+function getVariantStyles(
+  variant: SpinnerVariant,
+  themeColor: PrimaryColor = 'blue',
+  darkMode: boolean = true,
+): string {
+  const theme = getPrimaryClasses(themeColor);
+
+  const variants: Record<SpinnerVariant, { light: string; dark: string }> = {
+    default: {
+      light: 'text-slate-500',
+      dark: 'dark:text-slate-400',
+    },
+    primary: {
+      light: theme.text.split(' ')[0], // Get light mode class
+      dark: theme.text.split(' ')[1] || '', // Get dark mode class if exists
+    },
+    success: {
+      light: 'text-emerald-600',
+      dark: 'dark:text-emerald-400',
+    },
+    warning: {
+      light: 'text-amber-600',
+      dark: 'dark:text-amber-400',
+    },
+    error: {
+      light: 'text-red-600',
+      dark: 'dark:text-red-400',
+    },
+    white: {
+      light: 'text-white',
+      dark: '',
+    },
+    current: {
+      light: '',
+      dark: '',
+    },
+  };
+
+  const style = variants[variant];
+  if (variant === 'current') return ''; // Inherit from parent
+
+  return darkMode ? `${style.light} ${style.dark}`.trim() : style.light;
+}
 
 /**
  * Speed classes
@@ -152,13 +197,15 @@ export function getSpinnerClasses(props: SpinnerProps = {}): string {
     size = 'md',
     variant = 'default',
     speed = 'normal',
+    themeColor = 'blue',
+    darkMode = true,
     class: className,
   } = props;
 
   return cn(
     baseStyles,
     sizeStyles[size],
-    variantStyles[variant],
+    getVariantStyles(variant, themeColor, darkMode),
     speedClasses[speed],
     className,
   );
@@ -185,7 +232,7 @@ export function getSpinIconClasses(props: Pick<SpinnerProps, 'speed'> = {}): str
  * @returns HTML string for the spinner
  *
  * @example
- * const html = createSpinner({ size: 'lg', variant: 'primary' });
+ * const html = createSpinner({ size: 'lg', variant: 'primary', themeColor: 'violet' });
  */
 export function createSpinner(props: SpinnerProps = {}): string {
   const classes = getSpinnerClasses(props);
@@ -200,15 +247,18 @@ export function createSpinner(props: SpinnerProps = {}): string {
  * @returns HTML string
  *
  * @example
- * const html = createSpinnerWithLabel('Loading...', { size: 'sm' });
+ * const html = createSpinnerWithLabel('Loading...', { size: 'sm', themeColor: 'violet' });
  */
 export function createSpinnerWithLabel(
   label: string,
   props: SpinnerProps & { labelPosition?: 'left' | 'right' } = {},
 ): string {
-  const { labelPosition = 'right', ...spinnerProps } = props;
-  const spinner = createSpinner(spinnerProps);
-  const labelHtml = `<span>${label}</span>`;
+  const { labelPosition = 'right', darkMode = true, ...spinnerProps } = props;
+  const spinner = createSpinner({ ...spinnerProps, darkMode });
+
+  const labelColor = darkMode ? 'text-slate-600 dark:text-slate-300' : 'text-slate-600';
+
+  const labelHtml = `<span class="${labelColor}">${label}</span>`;
 
   const containerClasses = cn('inline-flex items-center gap-2', props.class);
 
@@ -227,18 +277,22 @@ export function createSpinnerWithLabel(
  * @returns HTML string
  *
  * @example
- * const html = createLoadingOverlay('Loading data...');
+ * const html = createLoadingOverlay('Loading data...', { themeColor: 'emerald' });
  */
 export function createLoadingOverlay(
   label?: string,
   props: SpinnerProps = {},
 ): string {
+  const { darkMode = true, ...spinnerProps } = props;
+
   const spinnerHtml = label
-    ? createSpinnerWithLabel(label, { ...props, size: props.size || 'lg' })
-    : createSpinner({ ...props, size: props.size || 'lg' });
+    ? createSpinnerWithLabel(label, { ...spinnerProps, darkMode, size: spinnerProps.size || 'lg' })
+    : createSpinner({ ...spinnerProps, darkMode, size: spinnerProps.size || 'lg' });
+
+  const bgClasses = darkMode ? 'bg-white/80 dark:bg-slate-900/80' : 'bg-white/80';
 
   return `
-<div class="flex items-center justify-center p-8">
+<div class="flex items-center justify-center p-8 ${bgClasses}">
   ${spinnerHtml}
 </div>`.trim();
 }

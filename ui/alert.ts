@@ -44,43 +44,97 @@ export interface AlertProps {
   icon?: string;
   /** Title text (optional, for prominent alerts) */
   title?: string;
+  /** Enable dark mode */
+  darkMode?: boolean;
   /** Additional CSS classes */
   class?: string;
 }
 
 /**
- * Variant styles
+ * Variant styles with dark mode support
  *
  * Design notes:
  * - Backgrounds use very light tints (50 weight)
  * - Borders provide definition without being harsh
  * - Icons match the semantic color
  */
-const variantStyles: Record<AlertVariant, string> = {
-  info: [
-    'bg-blue-50',
-    'border-blue-200',
-    'text-blue-800',
-  ].join(' '),
+function getVariantStyles(variant: AlertVariant, darkMode: boolean = true): {
+  container: string;
+  icon: string;
+  dismiss: string;
+} {
+  const variants: Record<AlertVariant, {
+    container: { light: string; dark: string };
+    icon: { light: string; dark: string };
+    dismiss: { light: string; dark: string };
+  }> = {
+    info: {
+      container: {
+        light: 'bg-blue-50 border-blue-200 text-blue-800',
+        dark: 'dark:bg-blue-950/50 dark:border-blue-800 dark:text-blue-200',
+      },
+      icon: {
+        light: 'text-blue-500',
+        dark: 'dark:text-blue-400',
+      },
+      dismiss: {
+        light: 'hover:bg-blue-100',
+        dark: 'dark:hover:bg-blue-900/50',
+      },
+    },
+    success: {
+      container: {
+        light: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+        dark: 'dark:bg-emerald-950/50 dark:border-emerald-800 dark:text-emerald-200',
+      },
+      icon: {
+        light: 'text-emerald-500',
+        dark: 'dark:text-emerald-400',
+      },
+      dismiss: {
+        light: 'hover:bg-emerald-100',
+        dark: 'dark:hover:bg-emerald-900/50',
+      },
+    },
+    warning: {
+      container: {
+        light: 'bg-amber-50 border-amber-200 text-amber-800',
+        dark: 'dark:bg-amber-950/50 dark:border-amber-800 dark:text-amber-200',
+      },
+      icon: {
+        light: 'text-amber-500',
+        dark: 'dark:text-amber-400',
+      },
+      dismiss: {
+        light: 'hover:bg-amber-100',
+        dark: 'dark:hover:bg-amber-900/50',
+      },
+    },
+    error: {
+      container: {
+        light: 'bg-red-50 border-red-200 text-red-800',
+        dark: 'dark:bg-red-950/50 dark:border-red-800 dark:text-red-200',
+      },
+      icon: {
+        light: 'text-red-500',
+        dark: 'dark:text-red-400',
+      },
+      dismiss: {
+        light: 'hover:bg-red-100',
+        dark: 'dark:hover:bg-red-900/50',
+      },
+    },
+  };
 
-  success: [
-    'bg-emerald-50',
-    'border-emerald-200',
-    'text-emerald-800',
-  ].join(' '),
-
-  warning: [
-    'bg-amber-50',
-    'border-amber-200',
-    'text-amber-800',
-  ].join(' '),
-
-  error: [
-    'bg-red-50',
-    'border-red-200',
-    'text-red-800',
-  ].join(' '),
-};
+  const style = variants[variant];
+  return {
+    container: darkMode
+      ? `${style.container.light} ${style.container.dark}`
+      : style.container.light,
+    icon: darkMode ? `${style.icon.light} ${style.icon.dark}` : style.icon.light,
+    dismiss: darkMode ? `${style.dismiss.light} ${style.dismiss.dark}` : style.dismiss.light,
+  };
+}
 
 /**
  * Default icons for each variant
@@ -90,16 +144,6 @@ const variantIcons: Record<AlertVariant, string> = {
   success: '<i class="ph ph-check-circle"></i>',
   warning: '<i class="ph ph-warning"></i>',
   error: '<i class="ph ph-x-circle"></i>',
-};
-
-/**
- * Icon color classes by variant
- */
-const variantIconColors: Record<AlertVariant, string> = {
-  info: 'text-blue-500',
-  success: 'text-emerald-500',
-  warning: 'text-amber-500',
-  error: 'text-red-500',
 };
 
 /**
@@ -137,12 +181,15 @@ export function getAlertClasses(props: AlertProps = {}): string {
   const {
     variant = 'info',
     size = 'md',
+    darkMode = true,
     class: className,
   } = props;
 
+  const styles = getVariantStyles(variant, darkMode);
+
   return cn(
     baseStyles,
-    variantStyles[variant],
+    styles.container,
     sizeStyles[size],
     className,
   );
@@ -151,8 +198,12 @@ export function getAlertClasses(props: AlertProps = {}): string {
 /**
  * Get icon classes for an alert
  */
-export function getAlertIconClasses(variant: AlertVariant = 'info'): string {
-  return cn('flex-shrink-0 text-lg', variantIconColors[variant]);
+export function getAlertIconClasses(
+  variant: AlertVariant = 'info',
+  darkMode: boolean = true,
+): string {
+  const styles = getVariantStyles(variant, darkMode);
+  return cn('flex-shrink-0 text-lg', styles.icon);
 }
 
 /**
@@ -172,13 +223,11 @@ export function getAlertTitleClasses(): string {
 /**
  * Get dismiss button classes
  */
-export function getAlertDismissClasses(variant: AlertVariant = 'info'): string {
-  const hoverColors: Record<AlertVariant, string> = {
-    info: 'hover:bg-blue-100',
-    success: 'hover:bg-emerald-100',
-    warning: 'hover:bg-amber-100',
-    error: 'hover:bg-red-100',
-  };
+export function getAlertDismissClasses(
+  variant: AlertVariant = 'info',
+  darkMode: boolean = true,
+): string {
+  const styles = getVariantStyles(variant, darkMode);
 
   return cn(
     'flex-shrink-0',
@@ -188,7 +237,7 @@ export function getAlertDismissClasses(variant: AlertVariant = 'info'): string {
     'cursor-pointer',
     'opacity-70',
     'hover:opacity-100',
-    hoverColors[variant],
+    styles.dismiss,
   );
 }
 
@@ -211,13 +260,14 @@ export function createAlert(message: string, props: AlertProps = {}): string {
     icon,
     title,
     dismissible = false,
+    darkMode = true,
   } = props;
 
   const alertClasses = getAlertClasses(props);
-  const iconClasses = getAlertIconClasses(variant);
+  const iconClasses = getAlertIconClasses(variant, darkMode);
   const contentClasses = getAlertContentClasses();
   const titleClasses = getAlertTitleClasses();
-  const dismissClasses = getAlertDismissClasses(variant);
+  const dismissClasses = getAlertDismissClasses(variant, darkMode);
 
   // Use provided icon or default for variant
   const iconHtml = icon || variantIcons[variant];
