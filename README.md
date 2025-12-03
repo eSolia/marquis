@@ -23,7 +23,7 @@ focused on visual presentation and brand consistency._
 // In deno.json
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.1/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.3.1/mod.ts"
   }
 }
 ```
@@ -116,6 +116,11 @@ const actions = createActionGroup([
 | **Header**     | Application header with nav, language switcher, user menu |
 | **Code**       | Inline code, code blocks, and keyboard shortcuts (kbd)    |
 | **Spinner**    | Loading indicators with multiple sizes and variants       |
+| **Progress**   | Progress bars (linear/circular) with determinate/indeterminate modes |
+| **Toggle**     | Toggle switches with labels and descriptions              |
+| **Skeleton**   | Loading placeholder animations for content                |
+| **Avatar**     | User avatars with initials fallback and status indicators |
+| **Toast**      | Non-intrusive notification messages with auto-dismiss     |
 
 ## Design Tokens
 
@@ -167,7 +172,7 @@ Or reference directly from GitHub:
 ```html
 <link
   rel="icon"
-  href="https://raw.githubusercontent.com/eSolia/marquis/v0.2.1/assets/favicons/darkblue/favicon-32x32.png"
+  href="https://raw.githubusercontent.com/eSolia/marquis/v0.3.1/assets/favicons/darkblue/favicon-32x32.png"
 >
 ```
 
@@ -182,6 +187,7 @@ marquis/
 │   └── colors.ts       # Color definitions
 ├── ui/
 │   ├── alert.ts
+│   ├── avatar.ts
 │   ├── badge.ts
 │   ├── button.ts
 │   ├── card.ts
@@ -190,9 +196,13 @@ marquis/
 │   ├── filter-bar.ts
 │   ├── header.ts
 │   ├── icon-button.ts
+│   ├── progress.ts
+│   ├── skeleton.ts
 │   ├── spinner.ts
 │   ├── table.ts
-│   └── tabs.ts
+│   ├── tabs.ts
+│   ├── toast.ts
+│   └── toggle.ts
 ├── utils/
 │   └── cn.ts           # Class name merging
 ├── assets/

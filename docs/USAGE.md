@@ -12,7 +12,7 @@ Clone or copy the `marquis` repository to your project, or import directly from 
 // In deno.json (recommended: pin to version)
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.2.1/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.3.1/mod.ts"
   }
 }
 ```
@@ -848,7 +848,7 @@ const headTags = getCompleteFaviconHtml('darkblue', '/assets/favicons');
 **Referencing from GitHub (for quick setup):**
 
 ```typescript
-const baseUrl = 'https://raw.githubusercontent.com/eSolia/marquis/v0.2.1/assets/favicons';
+const baseUrl = 'https://raw.githubusercontent.com/eSolia/marquis/v0.3.1/assets/favicons';
 const html = getCompleteFaviconHtml('darkblue', baseUrl);
 ```
 
