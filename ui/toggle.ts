@@ -55,6 +55,91 @@ export interface CreateToggleOptions extends ToggleProps {
 }
 
 // =============================================================================
+// CSS FOR SERVER-SIDE RENDERING
+// =============================================================================
+
+/**
+ * Get CSS for toggle switches using hidden checkbox + label pattern.
+ *
+ * This enables CSS-only toggle state changes for server-rendered HTML.
+ * Use with a hidden checkbox (class="sr-only peer") and label with
+ * class="toggle-track" containing a span with class="toggle-thumb".
+ *
+ * @example
+ * // Include in your page's <style> section:
+ * ${getToggleCSS()}
+ *
+ * // HTML structure:
+ * <div class="flex items-center gap-3">
+ *   <input type="checkbox" name="enabled" class="sr-only peer" id="toggle-1" />
+ *   <label for="toggle-1" class="toggle-track w-11 h-6 rounded-full cursor-pointer">
+ *     <span class="toggle-thumb w-5 h-5 rounded-full bg-white shadow-md"></span>
+ *   </label>
+ *   <label for="toggle-1">Enable feature</label>
+ * </div>
+ */
+export function getToggleCSS(themeColor = '#7c3aed'): string {
+  return `
+/* Toggle switch - CSS-only state via peer checkbox */
+.toggle-track {
+  background-color: #e2e8f0; /* slate-200 */
+  transition: background-color 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2px;
+  position: relative;
+}
+.peer:checked ~ .toggle-track,
+.peer:checked ~ * .toggle-track,
+.peer:checked ~ div .toggle-track {
+  background-color: ${themeColor};
+}
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .toggle-track {
+    background-color: #475569; /* slate-600 */
+  }
+}
+.dark .toggle-track {
+  background-color: #475569; /* slate-600 */
+}
+
+.toggle-thumb {
+  transform: translateX(0);
+  transition: transform 0.2s ease-in-out;
+}
+.peer:checked ~ .toggle-track .toggle-thumb,
+.peer:checked ~ * .toggle-track .toggle-thumb,
+.peer:checked ~ div .toggle-track .toggle-thumb {
+  transform: translateX(1.25rem); /* 20px - for md size */
+}
+/* Size variants for thumb translation */
+.toggle-track.toggle-sm .toggle-thumb { }
+.peer:checked ~ .toggle-track.toggle-sm .toggle-thumb,
+.peer:checked ~ * .toggle-track.toggle-sm .toggle-thumb {
+  transform: translateX(0.875rem); /* 14px - for sm size */
+}
+.peer:checked ~ .toggle-track.toggle-lg .toggle-thumb,
+.peer:checked ~ * .toggle-track.toggle-lg .toggle-thumb {
+  transform: translateX(1.625rem); /* 26px - for lg size */
+}
+
+.peer:focus ~ .toggle-track,
+.peer:focus ~ * .toggle-track,
+.peer:focus ~ div .toggle-track {
+  box-shadow: 0 0 0 2px color-mix(in srgb, ${themeColor} 25%, transparent);
+}
+
+.peer:disabled ~ .toggle-track,
+.peer:disabled ~ * .toggle-track,
+.peer:disabled ~ div .toggle-track {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+`.trim();
+}
+
+// =============================================================================
 // SIZE STYLES
 // =============================================================================
 

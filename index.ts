@@ -322,6 +322,7 @@ export {
   type CreateToggleOptions,
   createToggleWithInput,
   getToggleClasses,
+  getToggleCSS,
   getToggleDescriptionClasses,
   getToggleLabelClasses,
   getToggleThumbClasses,

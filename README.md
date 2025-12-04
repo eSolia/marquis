@@ -23,7 +23,7 @@ focused on visual presentation and brand consistency._
 // In deno.json
 {
   "imports": {
-    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.3.2/mod.ts"
+    "@esolia/marquis": "https://raw.githubusercontent.com/esolia/marquis/v0.3.3/mod.ts"
   }
 }
 ```
@@ -117,10 +117,53 @@ const actions = createActionGroup([
 | **Code**       | Inline code, code blocks, and keyboard shortcuts (kbd)    |
 | **Spinner**    | Loading indicators with multiple sizes and variants       |
 | **Progress**   | Progress bars (linear/circular) with determinate/indeterminate modes |
-| **Toggle**     | Toggle switches with labels and descriptions              |
+| **Toggle**     | Toggle switches with labels, descriptions, and CSS-only mode |
 | **Skeleton**   | Loading placeholder animations for content                |
 | **Avatar**     | User avatars with initials fallback and status indicators |
 | **Toast**      | Non-intrusive notification messages with auto-dismiss     |
+
+## Server-Side Rendering (CSS-Only Components)
+
+Some components provide CSS functions for server-rendered HTML where JavaScript interactivity
+isn't available. Include these CSS snippets in your page's `<style>` section.
+
+### Toggle CSS
+
+For toggle switches that work with hidden checkboxes (no JavaScript needed):
+
+```typescript
+import { getToggleCSS } from '@esolia/marquis';
+
+// In your layout template
+const css = getToggleCSS('#7c3aed'); // Optional: custom theme color
+```
+
+```html
+<!-- Include the CSS -->
+<style>${getToggleCSS()}</style>
+
+<!-- HTML structure -->
+<div class="flex items-center gap-3">
+  <input type="checkbox" name="enabled" class="sr-only peer" id="toggle-1" />
+  <label for="toggle-1" class="toggle-track w-11 h-6 rounded-full cursor-pointer">
+    <span class="toggle-thumb w-5 h-5 rounded-full bg-white shadow-md"></span>
+  </label>
+  <label for="toggle-1">Enable feature</label>
+</div>
+```
+
+The toggle responds to checkbox state via CSS `peer:checked` selectors.
+
+### Other CSS Functions
+
+| Function | Component | Purpose |
+|----------|-----------|---------|
+| `getSpinnerCSS()` | Spinner | Rotation animation |
+| `getProgressCSS()` | Progress | Indeterminate animations |
+| `getSkeletonCSS()` | Skeleton | Pulse/wave animations |
+| `getDropdownCSS()` | Dropdown | Hover/focus visibility |
+| `getToastCSS()` | Toast | Slide-in animations |
+| `getToggleCSS()` | Toggle | Checkbox-based state |
 
 ## Design Tokens
 
@@ -172,7 +215,7 @@ Or reference directly from GitHub:
 ```html
 <link
   rel="icon"
-  href="https://raw.githubusercontent.com/eSolia/marquis/v0.3.2/assets/favicons/darkblue/favicon-32x32.png"
+  href="https://raw.githubusercontent.com/eSolia/marquis/v0.3.3/assets/favicons/darkblue/favicon-32x32.png"
 >
 ```
 
