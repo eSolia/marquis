@@ -160,7 +160,7 @@ const sizeStyles: Record<AlertSize, string> = {
  */
 const baseStyles = [
   'flex',
-  'items-start',
+  'items-center',
   'gap-3',
   'rounded-lg',
   'border',
