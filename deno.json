@@ -14,13 +14,13 @@
     "lineWidth": 100,
     "indentWidth": 2,
     "singleQuote": true,
-    "exclude": ["docs/api"]
+    "exclude": ["docs/api", "docs-site/"]
   },
   "lint": {
     "rules": {
       "tags": ["recommended"]
     },
-    "exclude": ["docs/api"]
+    "exclude": ["docs/api", "docs-site/"]
   },
   "compilerOptions": {
     "strict": true,
