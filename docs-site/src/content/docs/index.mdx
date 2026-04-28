@@ -1,0 +1,36 @@
+---
+title: Marquis
+description: eSolia Inc UI component library for TypeScript projects, especially on Cloudflare Workers.
+template: splash
+hero:
+  title: Marquis
+  tagline: eSolia's UI component library for TypeScript — buttons, toggles, design tokens, and more.
+  actions:
+    - text: Get started
+      link: /tutorials/getting-started/
+      icon: right-arrow
+      variant: primary
+    - text: View on JSR
+      link: https://jsr.io/@esolia/marquis
+      icon: external
+    - text: GitHub
+      link: https://github.com/eSolia/marquis
+      icon: github
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Getting started" icon="open-book">
+    Practical examples for using Marquis components and tokens. Start with the [Getting Started guide](/tutorials/getting-started/).
+  </Card>
+  <Card title="API Reference" icon="jsr">
+    Complete API generated from JSDoc by `deno doc`. <a href="/api/" target="_blank" rel="noopener">Open the API reference →</a>
+  </Card>
+  <Card title="JSR package" icon="external">
+    Install with `deno add jsr:@esolia/marquis`. <a href="https://jsr.io/@esolia/marquis" target="_blank" rel="noopener">View on JSR →</a>
+  </Card>
+  <Card title="GitHub" icon="github">
+    Source code, issues, and releases. <a href="https://github.com/eSolia/marquis" target="_blank" rel="noopener">View on GitHub →</a>
+  </Card>
+</CardGrid>

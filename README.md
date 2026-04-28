@@ -1,10 +1,15 @@
 # Marquis
 
+[![JSR](https://jsr.io/badges/@esolia/marquis)](https://jsr.io/@esolia/marquis)
+[![Documentation](https://img.shields.io/badge/docs-cloudflare-orange)](https://marquis-docs.esolia.workers.dev/)
+
 **Marquis** — eSolia's UI component library. A vanilla TypeScript component library providing
 polished, professional UI components that work with Tailwind CSS and require no framework.
 
 _The name evokes "marquee" (prominent display) and "marque" (brand mark) — fitting for a library
 focused on visual presentation and brand consistency._
+
+📚 **Documentation:** [marquis-docs.esolia.workers.dev](https://marquis-docs.esolia.workers.dev/)
 
 ## Features
 
@@ -101,31 +106,31 @@ const actions = createActionGroup([
 
 ## Components
 
-| Component      | Description                                               |
-| -------------- | --------------------------------------------------------- |
-| **Badge**      | Status/label badges with semantic variants                |
-| **Button**     | Buttons with primary, secondary, ghost, danger variants   |
-| **IconButton** | Square icon buttons for row actions                       |
-| **Card**       | Container cards with multiple styles                      |
-| **StatCard**   | Dashboard metric display cards                            |
-| **Table**      | Table styling utilities                                   |
-| **Tabs**       | Tab groups with counts and icons                          |
-| **FilterBar**  | Filter controls (select, search, buttons)                 |
-| **Dropdown**   | CSS-only dropdown menus (no JavaScript required)          |
-| **Alert**      | Contextual feedback messages (info/success/warning/error) |
-| **Header**     | Application header with nav, language switcher, user menu |
-| **Code**       | Inline code, code blocks, and keyboard shortcuts (kbd)    |
-| **Spinner**    | Loading indicators with multiple sizes and variants       |
+| Component      | Description                                                          |
+| -------------- | -------------------------------------------------------------------- |
+| **Badge**      | Status/label badges with semantic variants                           |
+| **Button**     | Buttons with primary, secondary, ghost, danger variants              |
+| **IconButton** | Square icon buttons for row actions                                  |
+| **Card**       | Container cards with multiple styles                                 |
+| **StatCard**   | Dashboard metric display cards                                       |
+| **Table**      | Table styling utilities                                              |
+| **Tabs**       | Tab groups with counts and icons                                     |
+| **FilterBar**  | Filter controls (select, search, buttons)                            |
+| **Dropdown**   | CSS-only dropdown menus (no JavaScript required)                     |
+| **Alert**      | Contextual feedback messages (info/success/warning/error)            |
+| **Header**     | Application header with nav, language switcher, user menu            |
+| **Code**       | Inline code, code blocks, and keyboard shortcuts (kbd)               |
+| **Spinner**    | Loading indicators with multiple sizes and variants                  |
 | **Progress**   | Progress bars (linear/circular) with determinate/indeterminate modes |
-| **Toggle**     | Toggle switches with labels, descriptions, and CSS-only mode |
-| **Skeleton**   | Loading placeholder animations for content                |
-| **Avatar**     | User avatars with initials fallback and status indicators |
-| **Toast**      | Non-intrusive notification messages with auto-dismiss     |
+| **Toggle**     | Toggle switches with labels, descriptions, and CSS-only mode         |
+| **Skeleton**   | Loading placeholder animations for content                           |
+| **Avatar**     | User avatars with initials fallback and status indicators            |
+| **Toast**      | Non-intrusive notification messages with auto-dismiss                |
 
 ## Server-Side Rendering (CSS-Only Components)
 
-Some components provide CSS functions for server-rendered HTML where JavaScript interactivity
-isn't available. Include these CSS snippets in your page's `<style>` section.
+Some components provide CSS functions for server-rendered HTML where JavaScript interactivity isn't
+available. Include these CSS snippets in your page's `<style>` section.
 
 ### Toggle CSS
 
@@ -156,14 +161,14 @@ The toggle responds to checkbox state via CSS `peer:checked` selectors.
 
 ### Other CSS Functions
 
-| Function | Component | Purpose |
-|----------|-----------|---------|
-| `getSpinnerCSS()` | Spinner | Rotation animation |
-| `getProgressCSS()` | Progress | Indeterminate animations |
-| `getSkeletonCSS()` | Skeleton | Pulse/wave animations |
-| `getDropdownCSS()` | Dropdown | Hover/focus visibility |
-| `getToastCSS()` | Toast | Slide-in animations |
-| `getToggleCSS()` | Toggle | Checkbox-based state |
+| Function           | Component | Purpose                  |
+| ------------------ | --------- | ------------------------ |
+| `getSpinnerCSS()`  | Spinner   | Rotation animation       |
+| `getProgressCSS()` | Progress  | Indeterminate animations |
+| `getSkeletonCSS()` | Skeleton  | Pulse/wave animations    |
+| `getDropdownCSS()` | Dropdown  | Hover/focus visibility   |
+| `getToastCSS()`    | Toast     | Slide-in animations      |
+| `getToggleCSS()`   | Toggle    | Checkbox-based state     |
 
 ## Design Tokens
 
