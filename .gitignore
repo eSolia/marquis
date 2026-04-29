@@ -1,6 +1,9 @@
 # Deno
 .deno/
-deno.lock
+
+# Override global gitignore_global which ignores deno.lock —
+# JSR-published libraries should commit their lockfile for reproducibility.
+!deno.lock
 
 # Editor
 .vscode/

@@ -17,7 +17,8 @@ A vanilla TypeScript component library for eSolia's internal applications, desig
 
 1. **Provide visual polish** comparable to framework-based UI libraries (like Bits UI for Svelte)
    without requiring a framework
-2. **Work directly with Deno Deploy** and vanilla TypeScript — no build step, no framework overhead
+2. **Work directly with Cloudflare Workers** and vanilla TypeScript — no build step, no framework
+   overhead
 3. **Establish eSolia's corporate visual identity** as reusable, composable pieces
 4. **Bridge the quality gap** between quick vanilla implementations and polished SaaS-quality
    interfaces
@@ -33,14 +34,14 @@ A vanilla TypeScript component library for eSolia's internal applications, desig
 
 eSolia maintains two application stacks:
 
-| Application  | Stack                 | UI Approach          | Deployment  |
-| ------------ | --------------------- | -------------------- | ----------- |
-| **Pulse**    | SvelteKit + Bits UI   | Framework components | Cloudflare  |
-| **Periodic** | Vanilla TS + Tailwind | Hand-rolled          | Deno Deploy |
+| Application  | Stack                 | UI Approach          | Deployment         |
+| ------------ | --------------------- | -------------------- | ------------------ |
+| **Pulse**    | SvelteKit + Bits UI   | Framework components | Cloudflare         |
+| **Periodic** | Vanilla TS + Tailwind | Hand-rolled          | Cloudflare Workers |
 
 Pulse benefits from Bits UI's pre-composed, polished components. Periodic, while functional, lacks
-that same visual cohesion. This library brings Periodic (and future Deno Deploy apps) up to the same
-quality standard.
+that same visual cohesion. This library brings Periodic (and future Cloudflare Workers apps) up to
+the same quality standard.
 
 **Visual reference:** Compare the "Control Reference Library" page in Pulse (tabs with counts,
 refined badges, balanced table layout) to Periodic's "All DNS Checks" page. Both are functional, but
