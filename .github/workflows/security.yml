@@ -1,6 +1,12 @@
-# ============================================================================
-# Security Scanning — calls eSolia/devkit's shared reusable workflow
-# ============================================================================
+# Security Scanning — wrapper that triggers the vendored secrets-and-sast workflow.
+#
+# Vendored workflow lives at .github/workflows/secrets-and-sast-vendored.yml.
+# Wrapper exists because the vendored file is `on: workflow_call` only — this
+# wrapper provides the actual triggers and forwards inputs.
+#
+# Why vendored (not a direct cross-org call): marquis is public, eSolia/devkit
+# is private. GitHub blocks public consumers from calling private reusable
+# workflows. See secrets-and-sast-vendored.yml header for full context.
 
 name: Security
 
@@ -9,6 +15,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Weekly on Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,7 +26,7 @@ permissions:
 jobs:
   scan:
     name: Secrets & SAST
-    uses: eSolia/devkit/.github/workflows/secrets-and-sast.yml@main
+    uses: ./.github/workflows/secrets-and-sast-vendored.yml
     with:
       source-paths: 'mod.ts index.ts ui tokens utils assets'
       run-sbom: true
