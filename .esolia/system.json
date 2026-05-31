@@ -1,0 +1,21 @@
+{
+  "name": "marquis",
+  "purpose": "eSolia's framework-agnostic UI component library (@esolia/marquis): vanilla TypeScript, Tailwind-native components for consistent branded interfaces with no framework dependency.",
+  "repo": "eSolia/marquis",
+  "audience": "public",
+  "stack": ["typescript", "deno", "tailwindcss"],
+  "owners": ["RickCogley"],
+  "status": "active",
+  "sensitivity": {
+    "overview": "org",
+    "topology": "dev",
+    "security": "dev"
+  },
+  "exposes": [
+    { "name": "UI components", "kind": "library" }
+  ],
+  "links": {
+    "docs": "https://marquis-docs.esolia.workers.dev/",
+    "jsr": "https://jsr.io/@esolia/marquis"
+  }
+}
