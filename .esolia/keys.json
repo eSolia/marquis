@@ -1,0 +1,23 @@
+{
+  "$schema": "./keys.schema.json",
+  "secrets": [
+    {
+      "name": "CLOUDFLARE_CI_TOKEN",
+      "ref": "file:CLOUDFLARE_CI_TOKEN_MARQUIS",
+      "kind": "cf-api-token",
+      "consumers": [
+        {
+          "type": "gh-secret",
+          "scope": "repo"
+        }
+      ],
+      "rotation": {
+        "method": "manual",
+        "max_age_days": 180
+      },
+      "owner": "rick",
+      "bundle": "ops:cf-esolia",
+      "added": "2026-10-08"
+    }
+  ]
+}
