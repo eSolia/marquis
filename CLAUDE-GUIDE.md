@@ -772,18 +772,18 @@ import type {
 
 ```html
 <script type="module">
-  import { createButton, createToast, getToastCSS } from '@esolia/marquis';
+import { createButton, createToast, getToastCSS } from '@esolia/marquis';
 
-  // Add CSS
-  document.head.insertAdjacentHTML('beforeend', `<style>${getToastCSS()}</style>`);
+// Add CSS
+document.head.insertAdjacentHTML('beforeend', `<style>${getToastCSS()}</style>`);
 
-  // Create button
-  const btn = createButton('Click me', {
-    variant: 'primary',
-    themeColor: 'violet',
-  });
-  btn.addEventListener('click', () => showSuccessToast('Clicked!'));
-  document.body.appendChild(btn);
+// Create button
+const btn = createButton('Click me', {
+  variant: 'primary',
+  themeColor: 'violet',
+});
+btn.addEventListener('click', () => showSuccessToast('Clicked!'));
+document.body.appendChild(btn);
 </script>
 ```
 

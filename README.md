@@ -145,7 +145,9 @@ const css = getToggleCSS('#7c3aed'); // Optional: custom theme color
 
 ```html
 <!-- Include the CSS -->
-<style>${getToggleCSS()}</style>
+<style>
+${getToggleCSS()}
+</style>
 
 <!-- HTML structure -->
 <div class="flex items-center gap-3">
