@@ -30,5 +30,3 @@ jobs:
     with:
       source-paths: 'mod.ts index.ts ui tokens utils assets'
       run-sbom: true
-    secrets:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
